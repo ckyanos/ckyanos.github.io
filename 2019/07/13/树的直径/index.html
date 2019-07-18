@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>铺设道路 | ckyanos&#39;s bolg</title>
+  <title>树的直径 | ckyanos&#39;s bolg</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="12345678910111213141516171819202122232425262728#include&amp;lt;iostream&amp;gt;#include&amp;lt;cstdio&amp;gt;#include&amp;lt;cstring&amp;gt; #include&amp;lt;cmath&amp;gt;using namespace std;const int MAX_N = 1e6 + 10;inline int read">
-<meta name="keywords" content="noip2018,贪心">
+  <meta name="description" content="dp求树的直径12345678910void dp(int x) &amp;#123;	v[x] = 1;	for(int i = head[x]; i; i = Next[i]) &amp;#123;		int y = ver[i], z = edge[i];		if(v[y])continue;		dp(y);		ans = max(ans, d[x] + d[y] + z);		d[x] = max(d[x">
+<meta name="keywords" content="树的直径,图论">
 <meta property="og:type" content="article">
-<meta property="og:title" content="铺设道路">
-<meta property="og:url" content="http://yoursite.com/2019/07/14/铺设道路/index.html">
+<meta property="og:title" content="树的直径">
+<meta property="og:url" content="http://yoursite.com/2019/07/13/树的直径/index.html">
 <meta property="og:site_name" content="ckyanos&#39;s bolg">
-<meta property="og:description" content="12345678910111213141516171819202122232425262728#include&amp;lt;iostream&amp;gt;#include&amp;lt;cstdio&amp;gt;#include&amp;lt;cstring&amp;gt; #include&amp;lt;cmath&amp;gt;using namespace std;const int MAX_N = 1e6 + 10;inline int read">
+<meta property="og:description" content="dp求树的直径12345678910void dp(int x) &amp;#123;	v[x] = 1;	for(int i = head[x]; i; i = Next[i]) &amp;#123;		int y = ver[i], z = edge[i];		if(v[y])continue;		dp(y);		ans = max(ans, d[x] + d[y] + z);		d[x] = max(d[x">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-14T03:30:01.933Z">
+<meta property="og:updated_time" content="2019-07-17T13:17:41.142Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="铺设道路">
-<meta name="twitter:description" content="12345678910111213141516171819202122232425262728#include&amp;lt;iostream&amp;gt;#include&amp;lt;cstdio&amp;gt;#include&amp;lt;cstring&amp;gt; #include&amp;lt;cmath&amp;gt;using namespace std;const int MAX_N = 1e6 + 10;inline int read">
+<meta name="twitter:title" content="树的直径">
+<meta name="twitter:description" content="dp求树的直径12345678910void dp(int x) &amp;#123;	v[x] = 1;	for(int i = head[x]; i; i = Next[i]) &amp;#123;		int y = ver[i], z = edge[i];		if(v[y])continue;		dp(y);		ans = max(ans, d[x] + d[y] + z);		d[x] = max(d[x">
   
     <link rel="alternative" href="/atom.xml" title="ckyanos&#39;s bolg" type="application/atom+xml">
   
@@ -155,27 +155,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-铺设道路" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-树的直径" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      铺设道路
+      树的直径
     </h1>
   
 
         
-        <a href="/2019/07/14/铺设道路/" class="archive-article-date">
-  	<time datetime="2019-07-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
+        <a href="/2019/07/13/树的直径/" class="archive-article-date">
+  	<time datetime="2019-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N = <span class="number">1e6</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> s = <span class="number">0</span>, w = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span>(ch &lt; <span class="string">'0'</span> || ch &gt; <span class="string">'9'</span>)&#123;<span class="keyword">if</span>(ch == <span class="string">'-'</span>)w = <span class="number">-1</span>; ch = getchar();&#125;</span><br><span class="line">	<span class="keyword">while</span>(ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)s = s * <span class="number">10</span> + ch - <span class="string">'0'</span>, ch = getchar();</span><br><span class="line">	<span class="keyword">return</span> s * w;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n, x, y, ans;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">"road.in"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"road.out"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">	n = read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		x = read();</span><br><span class="line">		<span class="keyword">if</span>(x &gt; y)ans += x - y;</span><br><span class="line">		swap(x, y);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="dp求树的直径"><a href="#dp求树的直径" class="headerlink" title="dp求树的直径"></a>dp求树的直径</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dp</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	v[x] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = Next[i]) &#123;</span><br><span class="line">		<span class="keyword">int</span> y = ver[i], z = edge[i];</span><br><span class="line">		<span class="keyword">if</span>(v[y])<span class="keyword">continue</span>;</span><br><span class="line">		dp(y);</span><br><span class="line">		ans = max(ans, d[x] + d[y] + z);</span><br><span class="line">		d[x] = max(d[x], d[y] + z);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -209,11 +209,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">noip2018</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">树的直径</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
         		</li>
       		
 		</ul>
@@ -225,7 +225,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/noip2018复盘//" class="article-tag-list-link color1">noip2018复盘</a>
+        			<a href="/categories/模板//" class="article-tag-list-link color3">模板</a>
         		</li>
       		
 		</ul>
@@ -280,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/14/铺设道路/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/13/树的直径/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -294,11 +294,15 @@
   
 <nav id="article-nav">
   
-  
-    <a href="/2019/07/13/货币系统/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">货币系统</div>
-      <i class="icon-circle-right"></i>
+    <a href="/2019/07/13/货币系统/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          货币系统
+        
+      </div>
     </a>
+  
   
 </nav>
 
