@@ -124,18 +124,18 @@
 
 
 
-<meta name="description" content="dp求树的直径12345678910void dp(int x) &amp;#123;	v[x] = 1;	for(int i = head[x]; i; i = Next[i]) &amp;#123;		int y = ver[i], z = edge[i];		if(v[y])continue;		dp(y);		ans = max(ans, d[x] + d[y] + z);		d[x] = max(d[x">
+<meta name="description" content="给定一棵树，树中每条边都有一个权值，树中两点之间的距离定义为连接两点的路径边权之和。树中最远的两个节点之间的距离被称为树的直径，连接这两点的路径被称为树的最长链。后者通常也可称为直径，即直径是一个数值概念，也可代指一条路径 dp求树的直径12345678910void dp(int x) &amp;#123;	v[x] = 1;	for(int i = head[x]; i; i = Next[i]) &amp;">
 <meta name="keywords" content="树的直径,图论">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树的直径">
 <meta property="og:url" content="http://yoursite.com/2019/07/13/树的直径/index.html">
 <meta property="og:site_name" content="ckyanos&#39;s blog">
-<meta property="og:description" content="dp求树的直径12345678910void dp(int x) &amp;#123;	v[x] = 1;	for(int i = head[x]; i; i = Next[i]) &amp;#123;		int y = ver[i], z = edge[i];		if(v[y])continue;		dp(y);		ans = max(ans, d[x] + d[y] + z);		d[x] = max(d[x">
+<meta property="og:description" content="给定一棵树，树中每条边都有一个权值，树中两点之间的距离定义为连接两点的路径边权之和。树中最远的两个节点之间的距离被称为树的直径，连接这两点的路径被称为树的最长链。后者通常也可称为直径，即直径是一个数值概念，也可代指一条路径 dp求树的直径12345678910void dp(int x) &amp;#123;	v[x] = 1;	for(int i = head[x]; i; i = Next[i]) &amp;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-24T14:56:21.985Z">
+<meta property="og:updated_time" content="2019-07-24T16:29:21.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树的直径">
-<meta name="twitter:description" content="dp求树的直径12345678910void dp(int x) &amp;#123;	v[x] = 1;	for(int i = head[x]; i; i = Next[i]) &amp;#123;		int y = ver[i], z = edge[i];		if(v[y])continue;		dp(y);		ans = max(ans, d[x] + d[y] + z);		d[x] = max(d[x">
+<meta name="twitter:description" content="给定一棵树，树中每条边都有一个权值，树中两点之间的距离定义为连接两点的路径边权之和。树中最远的两个节点之间的距离被称为树的直径，连接这两点的路径被称为树的最长链。后者通常也可称为直径，即直径是一个数值概念，也可代指一条路径 dp求树的直径12345678910void dp(int x) &amp;#123;	v[x] = 1;	for(int i = head[x]; i; i = Next[i]) &amp;">
 
 
 
@@ -442,8 +442,8 @@
       
 
       
-        <h4 id="dp求树的直径"><a href="#dp求树的直径" class="headerlink" title="dp求树的直径"></a>dp求树的直径</h4><p><read more><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dp</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	v[x] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = Next[i]) &#123;</span><br><span class="line">		<span class="keyword">int</span> y = ver[i], z = edge[i];</span><br><span class="line">		<span class="keyword">if</span>(v[y])<span class="keyword">continue</span>;</span><br><span class="line">		dp(y);</span><br><span class="line">		ans = max(ans, d[x] + d[y] + z);</span><br><span class="line">		d[x] = max(d[x], d[y] + z);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></read></p>
-
+        <p>给定一棵树，树中每条边都有一个权值，树中两点之间的距离定义为连接两点的路径边权之和。树中最远的两个节点之间的距离被称为树的直径，连接这两点的路径被称为树的最长链。后者通常也可称为直径，即直径是一个数值概念，也可代指一条路径</p>
+<h4 id="dp求树的直径"><a href="#dp求树的直径" class="headerlink" title="dp求树的直径"></a>dp求树的直径</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dp</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	v[x] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = Next[i]) &#123;</span><br><span class="line">		<span class="keyword">int</span> y = ver[i], z = edge[i];</span><br><span class="line">		<span class="keyword">if</span>(v[y])<span class="keyword">continue</span>;</span><br><span class="line">		dp(y);</span><br><span class="line">		ans = max(ans, d[x] + d[y] + z);</span><br><span class="line">		d[x] = max(d[x], d[y] + z);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
