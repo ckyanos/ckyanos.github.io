@@ -111,7 +111,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="二分,">
 
 
 
@@ -124,17 +124,18 @@
 
 
 
-<meta name="description" content="OI">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="引言&amp;nbsp;  二分是一种常用而且非常精妙的算法，常常是我们解决问题的突破口。二分的基本用途是在单调序列或单调函数中做查找操作。因此，当问题的答案具有单调性时，就可以通过二分把求解转化为判定（根据复杂度理论，判定的难度小于求解）。进一步的，我们还可以通过三分解决单峰函数的极值以及相关问题。 二分写法12345678inline int Erfen(int x) &amp;#123;    while(">
+<meta name="keywords" content="二分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分笔记">
+<meta property="og:url" content="http://yoursite.com/2019/08/25/二分笔记/index.html">
 <meta property="og:site_name" content="ckyanos&#39;s blog">
-<meta property="og:description" content="OI">
+<meta property="og:description" content="引言&amp;nbsp;  二分是一种常用而且非常精妙的算法，常常是我们解决问题的突破口。二分的基本用途是在单调序列或单调函数中做查找操作。因此，当问题的答案具有单调性时，就可以通过二分把求解转化为判定（根据复杂度理论，判定的难度小于求解）。进一步的，我们还可以通过三分解决单峰函数的极值以及相关问题。 二分写法12345678inline int Erfen(int x) &amp;#123;    while(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-22T11:04:01.336Z">
+<meta property="og:updated_time" content="2019-08-26T05:18:49.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="OI">
+<meta name="twitter:title" content="二分笔记">
+<meta name="twitter:description" content="引言&amp;nbsp;  二分是一种常用而且非常精妙的算法，常常是我们解决问题的突破口。二分的基本用途是在单调序列或单调函数中做查找操作。因此，当问题的答案具有单调性时，就可以通过二分把求解转化为判定（根据复杂度理论，判定的难度小于求解）。进一步的，我们还可以通过三分解决单峰函数的极值以及相关问题。 二分写法12345678inline int Erfen(int x) &amp;#123;    while(">
 
 
 
@@ -164,13 +165,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/25/二分笔记/">
 
 
 
 
 
-  <title>tags | ckyanos's blog</title>
+  <title>二分笔记 | ckyanos's blog</title>
   
 
 
@@ -335,40 +336,178 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/25/二分笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ckyanos">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ckyanos's blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 8 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/LCA/" style="font-size: 12px; color: #ccc">LCA</a> <a href="/tags/noip2018/" style="font-size: 30px; color: #111">noip2018</a> <a href="/tags/二分/" style="font-size: 12px; color: #ccc">二分</a> <a href="/tags/图论/" style="font-size: 12px; color: #ccc">图论</a> <a href="/tags/最小生成树/" style="font-size: 12px; color: #ccc">最小生成树</a> <a href="/tags/树的直径/" style="font-size: 12px; color: #ccc">树的直径</a> <a href="/tags/筛法/" style="font-size: 12px; color: #ccc">筛法</a> <a href="/tags/贪心/" style="font-size: 30px; color: #111">贪心</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">二分笔记</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-25T00:00:00+08:00">
+                2019-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cpp/" itemprop="url" rel="index">
+                    <span itemprop="name">cpp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>&nbsp;  二分是一种常用而且非常精妙的算法，常常是我们解决问题的突破口。二分的基本用途是在单调序列或单调函数中做查找操作。因此，当问题的答案具有单调性时，就可以通过二分把求解转化为判定（根据复杂度理论，判定的难度小于求解）。进一步的，我们还可以通过三分解决单峰函数的极值以及相关问题。</p>
+<h1 id="二分写法"><a href="#二分写法" class="headerlink" title="二分写法"></a>二分写法</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Erfen</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>( l &lt;= r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = ( l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(check(mid))ans = mid, l = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二分题型"><a href="#二分题型" class="headerlink" title="二分题型"></a>二分题型</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>&nbsp;  用具有单调性的布尔表达式求解分界点，比如在有序数列中求数字$x$的排名。<br>&nbsp;<br>在单调递增序列 a 中查找 ≥x 的数中最小的一个(即x 或 x 的后继)<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="title">Erfen</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(a[mid] &gt;= x)r = mid; <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a[l];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在单调递增序列 a 中查找 ≤x 的数中最大的一个(即x 或 x 的前驱)<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="title">Erfen</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(a[mid] &lt;= x)l = mid; <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a[l];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二分/" rel="tag"><i class="fa fa-tag"></i> 二分</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/22/过路费/" rel="next" title="过路费">
+                <i class="fa fa-chevron-left"></i> 过路费
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/31/堆蛋糕/" rel="prev" title="堆蛋糕">
+                堆蛋糕 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -401,8 +540,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -499,6 +647,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二分写法"><span class="nav-number">2.</span> <span class="nav-text">二分写法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二分题型"><span class="nav-number">3.</span> <span class="nav-text">二分题型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二分查找"><span class="nav-number">3.1.</span> <span class="nav-text">二分查找</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
