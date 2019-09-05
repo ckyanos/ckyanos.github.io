@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[烽火传递]]></title>
+    <url>%2F2019%2F09%2F25%2F%E7%83%BD%E7%81%AB%E4%BC%A0%E9%80%92%2F</url>
+    <content type="text"><![CDATA[题目描述烽火台是重要的军事防御设施，一般建在交通要道或险要处。一旦有军情发生，则白天用浓烟，晚上有火光传递军情。 在某两个城市之间有 $n$ 座烽火台，每个烽火台发出信号都有一定的代价。为了使情报准确传递，在连续 $m$ 个烽火台中至少要有一个发出信号。现在输入 $n,m$ 和每个烽火台的代价，请计算总共最少的代价在两城市之间来准确传递情报。 Input第一行是 $n,m$，表示 $n$ 个烽火台和连续烽火台数 $m$； 第二行 $n$ 个整数表示每个烽火台的代价 $a_i$。 Output输出仅一个整数，表示最小代价。 样例输入125 31 2 5 6 2 样例输出14 样例说明在第 $2,5$ 号烽火台上发信号。 数据范围对于全部数据，$1\le n,m\le 2\times 10^5,1\le a_i\le 1000$。 Code:50分：12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;const int MAX_N = 1e6 + 10;const int INF = 99999999;int a[MAX_N], f[MAX_N];int n, m, ans = 99999999, cnt;int main() &#123; scanf("%d%d", &amp;n, &amp;m); for(int i = 1; i &lt;= n; i++) &#123; scanf("%d", &amp;a[i]); &#125; for(int i = 1; i &lt;= m; i++) &#123; f[i] = a[i]; &#125; for(int i = m + 1; i &lt;= n; i++) &#123; f[i] = INF; for(int j = i - m; j &lt;= i - 1; j++) &#123; f[i] = std::min(f[j] + a[i], f[i]); &#125; &#125; for(int i = n - m + 1; i &lt;= n; i++)ans = std::min(f[i], ans); printf("%d\n", ans); return 0;&#125; AC:123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int MAX_N = 1e6 + 10;int n, m;int a[MAX_N], f[MAX_N];int q[MAX_N], l, r;int main() &#123; scanf("%d %d", &amp;n, &amp;m); for(int i = 1; i &lt;= n; i++) &#123; scanf("%d" ,&amp;a[i]); &#125; for(int i = 1; i &lt;= n; i++) &#123; while(l &lt;= r &amp;&amp; q[l] &lt; i - m)l++; f[i] = f[q[l]] + a[i]; while(l &lt;= r &amp;&amp; f[q[r]] &gt;= f[i])r--; q[++r] = i; &#125; int ans = 99986465; l = r = 1; for(int i = n - m + 1; i &lt;= n; i++) &#123; ans = min(ans, f[i]); &#125; printf("%d\n", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>cpp</category>
+      </categories>
+      <tags>
+        <tag>DP</tag>
+        <tag>单调队列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[堆蛋糕]]></title>
     <url>%2F2019%2F08%2F31%2F%E5%A0%86%E8%9B%8B%E7%B3%95%2F</url>
     <content type="text"><![CDATA[题目描述其实moreD是一个十分犀利的蛋糕师。他最喜欢的食物就是蛋糕。 一天，他自己做出了n个圆柱状的蛋糕，每个蛋糕都有一个底面圆的半径Ri。高度都是一样的。 moreD在开始享用他的蛋糕大餐之前忽然觉得，圆柱状的蛋糕没有什么诱惑力。moreD看到了别人结婚用的蛋糕都是很多很多层的，那样的蛋糕才比较给力。但是堆太多层的蛋糕比较困难，于是moreD想要堆出许多三层的蛋糕，再开始自己的蛋糕大餐。 当然，作为蛋糕师，moreD在堆蛋糕的时候不会对蛋糕的形状有任何破坏，而且，moreD希望三层蛋糕的半径从上往下严格递增。这才是一个普通的好蛋糕。 moreD在考虑一个十分重要的问题，最多可以堆出多少三层蛋糕呢？ 输入第一行仅包含一个整数n，表示蛋糕的数量。 接下来n个整数，表示每个蛋糕半径的大小Ri。 输出输出一行仅包含一个整数，表示最多可以做成多少个蛋糕。 Sample Input1261 2 3 4 3 2 Sample Output12 Code:1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;cstdio&gt;const int MAX_N = 3e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;int CntNum[MAX_N];int CntFirst, CntSecond, ThreePieces, n, ans;int main() &#123; n = read(); ThreePieces = n / 3; for(int i = 1; i &lt;= n; i++) &#123; int x = read(); CntNum[x]++; &#125; for(int i = 1; i &lt;= n; i++) &#123; if(CntNum[i] &gt; CntFirst) &#123; CntSecond = CntFirst; CntFirst = CntNum[i]; &#125; else if(CntNum[i] &gt; CntSecond) &#123; CntSecond = CntNum[i]; &#125; &#125; if(CntFirst &gt; ThreePieces &amp;&amp; CntSecond &lt;= ThreePieces) &#123; ans = (n - CntFirst) / 2; &#125; else if(CntFirst &gt; ThreePieces &amp;&amp; CntSecond &gt; ThreePieces) &#123; ans = n - CntFirst - CntSecond; &#125; else ans = CntFirst; printf("%d\n", ans); return 0; &#125;]]></content>
@@ -42,8 +54,8 @@
         <category>noip2018复盘</category>
       </categories>
       <tags>
-        <tag>noip2018</tag>
         <tag>贪心</tag>
+        <tag>noip2018</tag>
       </tags>
   </entry>
   <entry>
