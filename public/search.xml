@@ -34,14 +34,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[优先队列]]></title>
-    <url>%2F2019%2F10%2F08%2F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%2F</url>
-    <content type="text"><![CDATA[定义优先队列(priority queue)普通的队列是一种先进先出的数据结构，元素在队列尾追加，而从队列头删除。在优先队列中，元素被赋予优先级。当访问元素时，具有最高优先级的元素最先删除。优先队列具有最高级先出 （first in, largest out）的行为特征。通常采用堆数据结构来实现。 数组实现12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;int heap[N], n;inline void up(int p) &#123; while(p &gt; 1) &#123; if(heap[p] &gt; heap[p / 2]) &#123; swap(heap[o], heap[p / 2]); p /= 2; &#125; &#125;&#125;inline void down(int p) &#123; int s = p * 2; if(s &lt; n &amp;&amp; heap[s] &lt; heap[s + 1])s++; while(s &lt;= n) &#123; if(heap[s] &gt; heap[n]) &#123; swap(heap[s], heap[p]); p = s; s = p * 2; &#125; else break; &#125;&#125; top123inline int gettop() &#123; return heap[1];&#125; pop()inline void pop() { heap[1] = heap[n—]; down(1);} STL12345#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;priority_queue&lt;int&gt;q;//大根堆priority_queue&lt;int,vector&lt;int&gt;, greater&lt;int&gt; &gt; q; 入队:1q.push(x); 出队:1q.pop(); 返回队头：1int x = q.top(); 返回队列的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
+    <title><![CDATA[质数]]></title>
+    <url>%2F2019%2F10%2F08%2F%E8%B4%A8%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[定义质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。 质数检验普通12345678inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; for(int i = 2; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 简单优化123456789inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; if(n % 2 == 0)return false; for(int i = 3; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 质数表埃氏筛法1234567891011bool v[N];inline int prime(int n) &#123; memset(v, true, v); v[0] = v[1] = 0; for(int i = 2; i &lt;= n; i++) &#123; if(!v[i])continue; for(int j = i + i; j &lt;= n; j+= i) &#123; v[j] = false; &#125; &#125;&#125; 欧拉筛法]]></content>
       <categories>
-        <category>基本数据结构</category>
+        <category>数论</category>
       </categories>
       <tags>
-        <tag>优先队列</tag>
+        <tag>质数</tag>
       </tags>
   </entry>
   <entry>
@@ -67,14 +67,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[质数]]></title>
-    <url>%2F2019%2F10%2F08%2F%E8%B4%A8%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[定义质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。 质数检验普通12345678inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; for(int i = 2; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 简单优化123456789inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; if(n % 2 == 0)return false; for(int i = 3; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 质数表埃氏筛法1234567891011bool v[N];inline int prime(int n) &#123; memset(v, true, v); v[0] = v[1] = 0; for(int i = 2; i &lt;= n; i++) &#123; if(!v[i])continue; for(int j = i + i; j &lt;= n; j+= i) &#123; v[j] = false; &#125; &#125;&#125; 欧拉筛法]]></content>
+    <title><![CDATA[并查集]]></title>
+    <url>%2F2019%2F10%2F08%2F%E5%B9%B6%E6%9F%A5%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[介绍并查集，在一些有N个元素的集合应用问题中，我们通常是在开始时让每个元素构成一个单元素的集合，然后按一定顺序将属于同一组的元素所在的集合合并，其间要反复查找一个元素在哪个集合中。这一类问题近几年来反复出现在信息学的国际国内赛题中，其特点是看似并不复杂，但数据量极大，若用正常的数据结构来描述的话，往往在空间上过大，计算机无法承受；即使在空间上勉强通过，运行的时间复杂度也极高，根本就不可能在比赛规定的运行时间（1～3秒）内计算出试题需要的结果，只能用并查集来描述。并查集是一种树型的数据结构，用于处理一些不相交集合（Disjoint Sets）的合并及查询问题。常常在使用中以森林来表示。 操作123456789#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;int fa[N], n, m;inline void init() &#123; for(int i = 1; i &lt;= n + 10; i++)fa[i] = i;&#125; get1234inline int get(int x) &#123; if(fa[x] == x)return x; return fa[x] = get(fa[x]);&#125; merge123inline void merge(int x, int y) &#123; fa[get(x)] = get(y);&#125; same123inline bool same(int x, int y) &#123; return get(x) == get(y);&#125;]]></content>
       <categories>
-        <category>数论</category>
+        <category>高等数据结构</category>
       </categories>
       <tags>
-        <tag>质数</tag>
+        <tag>并查集</tag>
       </tags>
   </entry>
   <entry>
@@ -86,6 +86,17 @@
       </categories>
       <tags>
         <tag>约数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[优先队列]]></title>
+    <url>%2F2019%2F10%2F08%2F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[定义优先队列(priority queue)普通的队列是一种先进先出的数据结构，元素在队列尾追加，而从队列头删除。在优先队列中，元素被赋予优先级。当访问元素时，具有最高优先级的元素最先删除。优先队列具有最高级先出 （first in, largest out）的行为特征。通常采用堆数据结构来实现。 数组实现12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;int heap[N], n;inline void up(int p) &#123; while(p &gt; 1) &#123; if(heap[p] &gt; heap[p / 2]) &#123; swap(heap[o], heap[p / 2]); p /= 2; &#125; &#125;&#125;inline void down(int p) &#123; int s = p * 2; if(s &lt; n &amp;&amp; heap[s] &lt; heap[s + 1])s++; while(s &lt;= n) &#123; if(heap[s] &gt; heap[n]) &#123; swap(heap[s], heap[p]); p = s; s = p * 2; &#125; else break; &#125;&#125; top123inline int gettop() &#123; return heap[1];&#125; pop()inline void pop() { heap[1] = heap[n—]; down(1);} STL12345#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;priority_queue&lt;int&gt;q;//大根堆priority_queue&lt;int,vector&lt;int&gt;, greater&lt;int&gt; &gt; q; 入队:1q.push(x); 出队:1q.pop(); 返回队头：1int x = q.top(); 返回队列的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
+      <categories>
+        <category>基本数据结构</category>
+      </categories>
+      <tags>
+        <tag>优先队列</tag>
       </tags>
   </entry>
   <entry>
