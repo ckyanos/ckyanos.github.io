@@ -61,14 +61,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[质数]]></title>
-    <url>%2F2019%2F10%2F08%2F%E8%B4%A8%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[定义质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。 质数检验普通12345678inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; for(int i = 2; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 简单优化123456789inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; if(n % 2 == 0)return false; for(int i = 3; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 质数表埃氏筛法1234567891011bool v[N];inline int prime(int n) &#123; memset(v, true, v); v[0] = v[1] = 0; for(int i = 2; i &lt;= n; i++) &#123; if(!v[i])continue; for(int j = i; j &lt;= n / i; j++) &#123; v[j] = false; &#125; &#125;&#125; 欧拉筛法123456789101112131415161718int v[N], prime[N];inilne void primes(int n) &#123; memset(v, 0, sizeof v); int cnt = 0;//质数个数 for(int i = 2; i &lt;= n; i++) &#123; if(v[i])continue; v[i] = i; prime[++tot] = i; for(int j = 1; j &lt;= tot; j++) &#123; if(prime[j] &gt; v[i] || prime[j] &gt; n / i)break; v[i * prime[j]] = prime[j]; &#125; &#125; for(int i = 1; i &lt;= tot; i++) &#123; printf("%d\n", prime[i]); &#125; return &#125;]]></content>
+    <title><![CDATA[链表]]></title>
+    <url>%2F2019%2F10%2F08%2F%E9%93%BE%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[定义链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。链表由一系列结点（链表中每一个元素称为结点）组成，结点可以在运行时动态生成。每个结点包括两个部分：一个是存储数据元素的数据域，另一个是存储下一个结点地址的指针域。 相比于线性表顺序结构，操作复杂。由于不必须按顺序存储，链表在插入的时候可以达到 $O(1)$ 的复杂度，比另一种线性表顺序表快得多，但是查找一个节点或者访问特定编号的节点则需要O(n)的时间，而线性表和顺序表相应的时间复杂度分别是 $O(logn)$ 和 $O(1)$ 。 数组实现123456789101112131415161718192021222324252627282930struct Node &#123; int value; int prev, next;&#125;node[SIZE];inline void init() &#123; tot = 2; head = 1, tail = 2; node[head].next = tail; node[tail].prev = head;&#125; inline void insert() &#123; int q = ++tot; node[q].value = val; node[node[p].next].prev = q; node[q].next = node[p].next; node[p].next = q; node[q].prev = p;&#125;inline void eraser(int p, int val) &#123; node[node[p].next].next = node[p].next; node[node[p].next].prev = node[p].prev; &#125;inline void clear() &#123; memset(node, 0, sizeof node); head = tail = tot = 0;&#125; 指针实现12345678910111213141516171819202122232425262728293031323334struct Node &#123; int val; Node *prev, *next;&#125;;Node *head, *tail;inline void init()&#123; head = new Node(); tail = new Node(); head-&gt;next = tail; tail-&gt;prev = head;&#125;inline void insert(Node *p, int val) &#123; int *q = new Node(); q-&gt;value = val; p-&gt;next-&gt;prev = q; q-&gt;next = p-&gt;next; p-&gt;next = q; q-&gt;prev = p;&#125;inline void romove(Node *p) &#123; p-&gt;prev-&gt;next = p-&gt;next; p-&gt;next-&gt;prev = p-&gt;prev; delete = p;&#125;inline void recycle() &#123; while(head != tail) &#123; head = head-&gt;next; delete head-&gt;prev; &#125; delete tail;&#125; STL实现1234#include&lt;iostream&gt;#include&lt;list&gt;using namespace std;vector&lt;int&gt;V; 返回元素个数:1return V.size(); 在链表开头添加元素:1V.push_front(x); 在链表末尾添加元素:1V.push_back(x); 删除表头元素:1V.pop_front(); 删除表末尾元素:1V.pop_back(); 在表的位置 p 处 插入元素 x:1V.insert(p, x); 删除表中位置 p 处 的元素:1V.erase(p); 删除向量中所有元素:1V.clear();]]></content>
       <categories>
-        <category>数论</category>
+        <category>基本数据结构</category>
       </categories>
       <tags>
-        <tag>质数</tag>
+        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -83,6 +83,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[质数]]></title>
+    <url>%2F2019%2F10%2F08%2F%E8%B4%A8%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[定义质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。 质数检验普通12345678inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; for(int i = 2; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 简单优化123456789inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; if(n % 2 == 0)return false; for(int i = 3; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 质数表埃氏筛法1234567891011bool v[N];inline int prime(int n) &#123; memset(v, true, v); v[0] = v[1] = 0; for(int i = 2; i &lt;= n; i++) &#123; if(!v[i])continue; for(int j = i; j &lt;= n / i; j++) &#123; v[j] = false; &#125; &#125;&#125; 欧拉筛法123456789101112131415161718int v[N], prime[N];inilne void primes(int n) &#123; memset(v, 0, sizeof v); int cnt = 0;//质数个数 for(int i = 2; i &lt;= n; i++) &#123; if(v[i])continue; v[i] = i; prime[++tot] = i; for(int j = 1; j &lt;= tot; j++) &#123; if(prime[j] &gt; v[i] || prime[j] &gt; n / i)break; v[i * prime[j]] = prime[j]; &#125; &#125; for(int i = 1; i &lt;= tot; i++) &#123; printf("%d\n", prime[i]); &#125; return &#125;]]></content>
+      <categories>
+        <category>数论</category>
+      </categories>
+      <tags>
+        <tag>质数</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[快速幂]]></title>
     <url>%2F2019%2F10%2F08%2F%E5%BF%AB%E9%80%9F%E5%B9%82%2F</url>
     <content type="text"><![CDATA[介绍顾名思义，快速幂就是快速算底数的 $n$ 次幂。其时间复杂度为 $O(log₂N)$， 与朴素的 $O(N)$ 相比效率有了极大的提高。(N 为幂)$x^{b} % mod$ 非递归12345678910const long long mod = 114514;inline long long mod_pow(long long x, long long b) &#123; long long res = 1; while(b) &#123; if(n &amp; 1) res = res * x % mod; x = x * x % mod; n &gt;&gt;= 1; &#125; return res;&#125; 递归1234567const long long mod = 114514;inline long long mod_pow(long long x, long long b) &#123; if(b == 0)return 1; long long res = mod_pow(x * x % mod, n / 2); if(n &amp; 1) res = res * x % mod; return res;&#125;]]></content>
@@ -94,59 +105,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[最短路]]></title>
-    <url>%2F2019%2F10%2F08%2F%E6%9C%80%E7%9F%AD%E8%B7%AF%2F</url>
-    <content type="text"><![CDATA[任意两点之间的最短路Floyed算法123456789101112131415161718192021222324252627282930313233343536#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 2e3 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w; &#125;int n, m;int d[N][N];int main() &#123; memset(d, 0x3f, sizeof d); n = read(); for(int int i = 1; i &lt;= n; i++) &#123; int x = read(), y = read(), z = read(); d[y][x] = min(d[y][x], z); &#125; for(int k = 1; k &lt;= n; k++) &#123; for(int i = 1; i &lt;= n; i++) &#123; for(int j = 1; k &lt;= n; j++) &#123; d[i][j] = max(d[i][j], d[i][k] + d[k][j]); &#125; &#125; &#125; for(int i = 1; i &lt;= n; i++) &#123; for(int j = 1; i &lt;= n; j++) &#123; printf("%d ", d[i][j]); &#125; puts(""); &#125;&#125; 拓展:传递闭包1234567891011121314151617181920212223242526272829#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 2e3 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w; &#125;int n, m;int d[N][N];int main() &#123; n = read(); m = read(); for(int int i = 1; i &lt;= n; i++) d[i][i] = 1; for(int i = 1; i &lt;= n; i++) &#123; int x = raed(), y = read(); d[x][y] = d[y][x] = 1; &#125; for(int k = 1; k &lt;= n; k++) &#123; for(int i = 1; i &lt;= n; i++) &#123; for(int j = 1; k &lt;= n; j++) &#123; d[i][j] |= d[i][k] &amp; d[k][j]; &#125; &#125; &#125;&#125; 单源最短路dijkstra算法12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 2e3 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w; &#125;int a[N][N], d[N], n, m;bool v[N];inline void dijkstra(int s) &#123; memset(d, 0x3f, sizeof d); memset(v, 0, sizeof v); d[s] = 0; for(int i = 1; i &lt; n; i++) &#123; int x = 0; for(int j = 1; j &lt;= n; j++) &#123; if(!v[j] &amp;&amp; (x == 0 || d[j] &lt; d[i])) &#123; x = j; &#125; v[x] = 1; &#125; &#125; for(int y = 1; y &lt;= n; y++) &#123; d[y] = min(d[y], d[x] + a[x][y]); &#125;&#125;int main() &#123; n = read(); m = read(); memset(a, 0x3f, sizeof a); for(int i = 1; i &lt;= n; i++)a[i][i] = 0; for(int i = 1; i &lt;= m; i++) &#123; int x = read(), y = read(), z = read(); a[x][y] = min(a[x][y], z); a[y][x] = min(a[y][x], z); &#125; int s = 1; dijkstra(s); for(int i = 1; i &lt;= n; i++) &#123; printf("%d\n", d[i]); &#125; return 0;&#125; 堆优化后的dijkstra123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w; &#125;int head[N], Next[N], ver[N], edge[N], tot;bool v[N];int n, m;priority_queue&lt; pair&lt;int, int &gt; &gt; q;inline void add(int x, int y, int z) &#123; ver[++tot] = y; edge[tot] = z; Next[tot] = head[x]; head[x] = tot;&#125;inline void dijkstra(int s) &#123; memset(d, 0x3f, sizeof d); memset(v, 0, suzeof v); d[s] = 0; q.push(make_pair(0, s)); while(q.size()) &#123; int x = q.top().second; q.pop(); if(v[x])continue; v[x] = 1; for(int i = head[x]; i; i = Next[i]) &#123; int y = ver[i], z = edge[i]; if(d[y] &gt; d[x] + z) &#123; d[y] = d[x] + z; q.push(make_pair(-d[y], y)); &#125; &#125; &#125;&#125; int main() &#123; n = read(); m = read(); for(int i = 1; i &lt;= m; i++) &#123; int x = read(), y = read(), z = read(); add(x, y, z); add(y, x, z); &#125; int s = 1; dijkstra(s); for(int i = 1; i &lt;= n; i++) &#123; printf("%d ", d[i]); &#125; return 0;&#125; spfa1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w; &#125;int head[N], Next[N], ver[N], edge[N], tot;bool v[N];int n, m;queue&lt;int&gt; q;inline void add(int x, int y, int z) &#123; ver[++tot] = y; edge[tot] = z; Next[tot] = head[x]; head[x] = tot;&#125;inline void spfa(int s) &#123; memset(d, 0x3f, sizeof d); memset(v, 0, suzeof v); d[s] = 0; v[s] = 1; q.push(s); while(q.size()) &#123; int x = q.front(); q.pop(); v[x] = 0; for(int i = head[x]; i;i = Next[i]) &#123; int y = ver[i], z = edge[i]; if(d[y] &gt; d[x] + z) &#123; d[y] = d[x] + z; if(!v[y]) &#123; q.push(y); v[y] = 1; &#125; &#125; &#125; &#125;&#125;int main() &#123; n = read(); m = read(); for(int i = 1; i &lt;= m; i++) &#123; int x = read(), y = read(), z = read(); add(x, y, z); add(y, x, z); &#125; int s = 1; spfa(s); for(int i = 1; i &lt;= n; i++) &#123; printf("%d ", d[i]); &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>图论</category>
-      </categories>
-      <tags>
-        <tag>最短路</tag>
-        <tag>传递闭包</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[栈]]></title>
-    <url>%2F2019%2F10%2F08%2F%E6%A0%88%2F</url>
-    <content type="text"><![CDATA[定义栈作为一种数据结构，是一种只能在一端进行插入和删除操作的特殊线性表。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。栈具有记忆作用，对栈的插入与删除操作中，不需要改变栈底指针。栈是允许在同一端进行插入和删除操作的特殊线性表。允许进行插入和删除操作的一端称为栈顶(top)，另一端为栈底(bottom)；栈底固定，而栈顶浮动；栈中元素个数为零时称为空栈。插入一般称为进栈（PUSH），删除则称为退栈（POP）。栈也称为先进后出表。 数组实现1234567891011const int N = 1e6 + 10;int q[N], tot;inline void push(int x) &#123; q[++tot] = x;&#125;inline int top() &#123; return q[tot];&#125;inline void pop(int x) &#123; tot--;&#125; STL1234#include&lt;iostream&gt;#include&lt;stack&gt;using namespace std;stack&lt;int&gt; q; 压栈:1q.push(x); 弹栈:1q.pop(); 返回栈顶：1int x = q.top(); 返回栈的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
+    <title><![CDATA[队列]]></title>
+    <url>%2F2019%2F10%2F08%2F%E9%98%9F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[定义队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操作的端称为队头。队列中没有元素时，称为空队列。队列的数据元素又称为队列元素。在队列中插入一个队列元素称为入队，从队列中删除一个队列元素称为出队。因为队列只允许在一端插入，在另一端删除，所以只有最早进入队列的元素才能最先从队列中删除，故队列又称为先进先出（FIFO—first in first out）线性表。 数组实现1234567891011const int N = 1e6 + 10;int q[N], head, tail;inline void push(int x) &#123; q[++tail] = x;&#125;inline int top() &#123; return q[tail];&#125;inline void pop(int x) &#123; head++;&#125; STL实现1234#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;queue&lt;int&gt; q; 入队:1q.push(x); 出队:1q.pop(); 返回队头：1int x = q.front(); 返回队列的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
       <categories>
         <category>基本数据结构</category>
       </categories>
       <tags>
-        <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[链表]]></title>
-    <url>%2F2019%2F10%2F08%2F%E9%93%BE%E8%A1%A8%2F</url>
-    <content type="text"><![CDATA[定义链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。链表由一系列结点（链表中每一个元素称为结点）组成，结点可以在运行时动态生成。每个结点包括两个部分：一个是存储数据元素的数据域，另一个是存储下一个结点地址的指针域。 相比于线性表顺序结构，操作复杂。由于不必须按顺序存储，链表在插入的时候可以达到 $O(1)$ 的复杂度，比另一种线性表顺序表快得多，但是查找一个节点或者访问特定编号的节点则需要O(n)的时间，而线性表和顺序表相应的时间复杂度分别是 $O(logn)$ 和 $O(1)$ 。 数组实现123456789101112131415161718192021222324252627282930struct Node &#123; int value; int prev, next;&#125;node[SIZE];inline void init() &#123; tot = 2; head = 1, tail = 2; node[head].next = tail; node[tail].prev = head;&#125; inline void insert() &#123; int q = ++tot; node[q].value = val; node[node[p].next].prev = q; node[q].next = node[p].next; node[p].next = q; node[q].prev = p;&#125;inline void eraser(int p, int val) &#123; node[node[p].next].next = node[p].next; node[node[p].next].prev = node[p].prev; &#125;inline void clear() &#123; memset(node, 0, sizeof node); head = tail = tot = 0;&#125; 指针实现12345678910111213141516171819202122232425262728293031323334struct Node &#123; int val; Node *prev, *next;&#125;;Node *head, *tail;inline void init()&#123; head = new Node(); tail = new Node(); head-&gt;next = tail; tail-&gt;prev = head;&#125;inline void insert(Node *p, int val) &#123; int *q = new Node(); q-&gt;value = val; p-&gt;next-&gt;prev = q; q-&gt;next = p-&gt;next; p-&gt;next = q; q-&gt;prev = p;&#125;inline void romove(Node *p) &#123; p-&gt;prev-&gt;next = p-&gt;next; p-&gt;next-&gt;prev = p-&gt;prev; delete = p;&#125;inline void recycle() &#123; while(head != tail) &#123; head = head-&gt;next; delete head-&gt;prev; &#125; delete tail;&#125; STL实现1234#include&lt;iostream&gt;#include&lt;list&gt;using namespace std;vector&lt;int&gt;V; 返回元素个数:1return V.size(); 在链表开头添加元素:1V.push_front(x); 在链表末尾添加元素:1V.push_back(x); 删除表头元素:1V.pop_front(); 删除表末尾元素:1V.pop_back(); 在表的位置 p 处 插入元素 x:1V.insert(p, x); 删除表中位置 p 处 的元素:1V.erase(p); 删除向量中所有元素:1V.clear();]]></content>
-      <categories>
-        <category>基本数据结构</category>
-      </categories>
-      <tags>
-        <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[vector]]></title>
-    <url>%2F2019%2F10%2F08%2Fvector%2F</url>
-    <content type="text"><![CDATA[定义向量（Vector）是一个封装了动态大小数组的顺序容器（Sequence Container）。跟任意其它类型容器一样，它能够存放各种类型的对象。可以简单的认为，向量是一个能够存放任意类型的动态数组。 vector的使用方法1234#include&lt;iostream&gt;#include&lt;vector&gt;using namespace std;vector&lt;int&gt;V; 返回向量个数:1return V.size(); 在向量末尾添加元素:1V.push_back(x); 删除向量最后一个元素:1V.pop_back(); 返回指向向量开头的迭代器:1return V.begin(); 返回指向向量末尾的迭代器:1return V.end(); 在向量的位置 p 处 插入元素 x:1V.insert(p, x); 删除向量位置 p 处 的元素:1V.erase(p); 删除向量中所有元素:1V.clear();]]></content>
-      <categories>
-        <category>基本数据结构</category>
-      </categories>
-      <tags>
-        <tag>vector</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[优先队列]]></title>
-    <url>%2F2019%2F10%2F08%2F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%2F</url>
-    <content type="text"><![CDATA[定义优先队列(priority queue)普通的队列是一种先进先出的数据结构，元素在队列尾追加，而从队列头删除。在优先队列中，元素被赋予优先级。当访问元素时，具有最高优先级的元素最先删除。优先队列具有最高级先出 （first in, largest out）的行为特征。通常采用堆数据结构来实现。 数组实现12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;int heap[N], n;inline void up(int p) &#123; while(p &gt; 1) &#123; if(heap[p] &gt; heap[p / 2]) &#123; swap(heap[o], heap[p / 2]); p /= 2; &#125; &#125;&#125;inline void down(int p) &#123; int s = p * 2; if(s &lt; n &amp;&amp; heap[s] &lt; heap[s + 1])s++; while(s &lt;= n) &#123; if(heap[s] &gt; heap[n]) &#123; swap(heap[s], heap[p]); p = s; s = p * 2; &#125; else break; &#125;&#125; top123inline int gettop() &#123; return heap[1];&#125; pop()inline void pop() { heap[1] = heap[n—]; down(1);} STL12345#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;priority_queue&lt;int&gt;q;//大根堆priority_queue&lt;int,vector&lt;int&gt;, greater&lt;int&gt; &gt; q; 入队:1q.push(x); 出队:1q.pop(); 返回队头：1int x = q.top(); 返回队列的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
-      <categories>
-        <category>基本数据结构</category>
-      </categories>
-      <tags>
-        <tag>优先队列</tag>
+        <tag>队列</tag>
       </tags>
   </entry>
   <entry>
@@ -161,14 +127,48 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[队列]]></title>
-    <url>%2F2019%2F10%2F08%2F%E9%98%9F%E5%88%97%2F</url>
-    <content type="text"><![CDATA[定义队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操作的端称为队头。队列中没有元素时，称为空队列。队列的数据元素又称为队列元素。在队列中插入一个队列元素称为入队，从队列中删除一个队列元素称为出队。因为队列只允许在一端插入，在另一端删除，所以只有最早进入队列的元素才能最先从队列中删除，故队列又称为先进先出（FIFO—first in first out）线性表。 数组实现1234567891011const int N = 1e6 + 10;int q[N], head, tail;inline void push(int x) &#123; q[++tail] = x;&#125;inline int top() &#123; return q[tail];&#125;inline void pop(int x) &#123; head++;&#125; STL实现1234#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;queue&lt;int&gt; q; 入队:1q.push(x); 出队:1q.pop(); 返回队头：1int x = q.front(); 返回队列的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
+    <title><![CDATA[vector]]></title>
+    <url>%2F2019%2F10%2F08%2Fvector%2F</url>
+    <content type="text"><![CDATA[定义向量（Vector）是一个封装了动态大小数组的顺序容器（Sequence Container）。跟任意其它类型容器一样，它能够存放各种类型的对象。可以简单的认为，向量是一个能够存放任意类型的动态数组。 vector的使用方法1234#include&lt;iostream&gt;#include&lt;vector&gt;using namespace std;vector&lt;int&gt;V; 返回向量个数:1return V.size(); 在向量末尾添加元素:1V.push_back(x); 删除向量最后一个元素:1V.pop_back(); 返回指向向量开头的迭代器:1return V.begin(); 返回指向向量末尾的迭代器:1return V.end(); 在向量的位置 p 处 插入元素 x:1V.insert(p, x); 删除向量位置 p 处 的元素:1V.erase(p); 删除向量中所有元素:1V.clear();]]></content>
       <categories>
         <category>基本数据结构</category>
       </categories>
       <tags>
-        <tag>队列</tag>
+        <tag>vector</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[栈]]></title>
+    <url>%2F2019%2F10%2F08%2F%E6%A0%88%2F</url>
+    <content type="text"><![CDATA[定义栈作为一种数据结构，是一种只能在一端进行插入和删除操作的特殊线性表。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。栈具有记忆作用，对栈的插入与删除操作中，不需要改变栈底指针。栈是允许在同一端进行插入和删除操作的特殊线性表。允许进行插入和删除操作的一端称为栈顶(top)，另一端为栈底(bottom)；栈底固定，而栈顶浮动；栈中元素个数为零时称为空栈。插入一般称为进栈（PUSH），删除则称为退栈（POP）。栈也称为先进后出表。 数组实现1234567891011const int N = 1e6 + 10;int q[N], tot;inline void push(int x) &#123; q[++tot] = x;&#125;inline int top() &#123; return q[tot];&#125;inline void pop(int x) &#123; tot--;&#125; STL1234#include&lt;iostream&gt;#include&lt;stack&gt;using namespace std;stack&lt;int&gt; q; 压栈:1q.push(x); 弹栈:1q.pop(); 返回栈顶：1int x = q.top(); 返回栈的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
+      <categories>
+        <category>基本数据结构</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[优先队列]]></title>
+    <url>%2F2019%2F10%2F08%2F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[定义优先队列(priority queue)普通的队列是一种先进先出的数据结构，元素在队列尾追加，而从队列头删除。在优先队列中，元素被赋予优先级。当访问元素时，具有最高优先级的元素最先删除。优先队列具有最高级先出 （first in, largest out）的行为特征。通常采用堆数据结构来实现。 数组实现12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;int heap[N], n;inline void up(int p) &#123; while(p &gt; 1) &#123; if(heap[p] &gt; heap[p / 2]) &#123; swap(heap[o], heap[p / 2]); p /= 2; &#125; &#125;&#125;inline void down(int p) &#123; int s = p * 2; if(s &lt; n &amp;&amp; heap[s] &lt; heap[s + 1])s++; while(s &lt;= n) &#123; if(heap[s] &gt; heap[n]) &#123; swap(heap[s], heap[p]); p = s; s = p * 2; &#125; else break; &#125;&#125; top123inline int gettop() &#123; return heap[1];&#125; pop()inline void pop() { heap[1] = heap[n—]; down(1);} STL12345#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;priority_queue&lt;int&gt;q;//大根堆priority_queue&lt;int,vector&lt;int&gt;, greater&lt;int&gt; &gt; q; 入队:1q.push(x); 出队:1q.pop(); 返回队头：1int x = q.top(); 返回队列的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
+      <categories>
+        <category>基本数据结构</category>
+      </categories>
+      <tags>
+        <tag>优先队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[最短路]]></title>
+    <url>%2F2019%2F10%2F08%2F%E6%9C%80%E7%9F%AD%E8%B7%AF%2F</url>
+    <content type="text"><![CDATA[任意两点之间的最短路Floyed算法123456789101112131415161718192021222324252627282930313233343536#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 2e3 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w; &#125;int n, m;int d[N][N];int main() &#123; memset(d, 0x3f, sizeof d); n = read(); for(int int i = 1; i &lt;= n; i++) &#123; int x = read(), y = read(), z = read(); d[y][x] = min(d[y][x], z); &#125; for(int k = 1; k &lt;= n; k++) &#123; for(int i = 1; i &lt;= n; i++) &#123; for(int j = 1; k &lt;= n; j++) &#123; d[i][j] = max(d[i][j], d[i][k] + d[k][j]); &#125; &#125; &#125; for(int i = 1; i &lt;= n; i++) &#123; for(int j = 1; i &lt;= n; j++) &#123; printf("%d ", d[i][j]); &#125; puts(""); &#125;&#125; 拓展:传递闭包1234567891011121314151617181920212223242526272829#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 2e3 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w; &#125;int n, m;int d[N][N];int main() &#123; n = read(); m = read(); for(int int i = 1; i &lt;= n; i++) d[i][i] = 1; for(int i = 1; i &lt;= n; i++) &#123; int x = raed(), y = read(); d[x][y] = d[y][x] = 1; &#125; for(int k = 1; k &lt;= n; k++) &#123; for(int i = 1; i &lt;= n; i++) &#123; for(int j = 1; k &lt;= n; j++) &#123; d[i][j] |= d[i][k] &amp; d[k][j]; &#125; &#125; &#125;&#125; 单源最短路dijkstra算法12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 2e3 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w; &#125;int a[N][N], d[N], n, m;bool v[N];inline void dijkstra(int s) &#123; memset(d, 0x3f, sizeof d); memset(v, 0, sizeof v); d[s] = 0; for(int i = 1; i &lt; n; i++) &#123; int x = 0; for(int j = 1; j &lt;= n; j++) &#123; if(!v[j] &amp;&amp; (x == 0 || d[j] &lt; d[i])) &#123; x = j; &#125; v[x] = 1; &#125; &#125; for(int y = 1; y &lt;= n; y++) &#123; d[y] = min(d[y], d[x] + a[x][y]); &#125;&#125;int main() &#123; n = read(); m = read(); memset(a, 0x3f, sizeof a); for(int i = 1; i &lt;= n; i++)a[i][i] = 0; for(int i = 1; i &lt;= m; i++) &#123; int x = read(), y = read(), z = read(); a[x][y] = min(a[x][y], z); a[y][x] = min(a[y][x], z); &#125; int s = 1; dijkstra(s); for(int i = 1; i &lt;= n; i++) &#123; printf("%d\n", d[i]); &#125; return 0;&#125; 堆优化后的dijkstra123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w; &#125;int head[N], Next[N], ver[N], edge[N], tot;bool v[N];int n, m;priority_queue&lt; pair&lt;int, int &gt; &gt; q;inline void add(int x, int y, int z) &#123; ver[++tot] = y; edge[tot] = z; Next[tot] = head[x]; head[x] = tot;&#125;inline void dijkstra(int s) &#123; memset(d, 0x3f, sizeof d); memset(v, 0, suzeof v); d[s] = 0; q.push(make_pair(0, s)); while(q.size()) &#123; int x = q.top().second; q.pop(); if(v[x])continue; v[x] = 1; for(int i = head[x]; i; i = Next[i]) &#123; int y = ver[i], z = edge[i]; if(d[y] &gt; d[x] + z) &#123; d[y] = d[x] + z; q.push(make_pair(-d[y], y)); &#125; &#125; &#125;&#125; int main() &#123; n = read(); m = read(); for(int i = 1; i &lt;= m; i++) &#123; int x = read(), y = read(), z = read(); add(x, y, z); add(y, x, z); &#125; int s = 1; dijkstra(s); for(int i = 1; i &lt;= n; i++) &#123; printf("%d ", d[i]); &#125; return 0;&#125; spfa1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w; &#125;int head[N], Next[N], ver[N], edge[N], tot;bool v[N];int n, m;queue&lt;int&gt; q;inline void add(int x, int y, int z) &#123; ver[++tot] = y; edge[tot] = z; Next[tot] = head[x]; head[x] = tot;&#125;inline void spfa(int s) &#123; memset(d, 0x3f, sizeof d); memset(v, 0, suzeof v); d[s] = 0; v[s] = 1; q.push(s); while(q.size()) &#123; int x = q.front(); q.pop(); v[x] = 0; for(int i = head[x]; i;i = Next[i]) &#123; int y = ver[i], z = edge[i]; if(d[y] &gt; d[x] + z) &#123; d[y] = d[x] + z; if(!v[y]) &#123; q.push(y); v[y] = 1; &#125; &#125; &#125; &#125;&#125;int main() &#123; n = read(); m = read(); for(int i = 1; i &lt;= m; i++) &#123; int x = read(), y = read(), z = read(); add(x, y, z); add(y, x, z); &#125; int s = 1; spfa(s); for(int i = 1; i &lt;= n; i++) &#123; printf("%d ", d[i]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>图论</category>
+      </categories>
+      <tags>
+        <tag>最短路</tag>
+        <tag>传递闭包</tag>
       </tags>
   </entry>
   <entry>
