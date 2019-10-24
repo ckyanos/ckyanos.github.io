@@ -111,7 +111,7 @@
 
 
 
-  <meta name="keywords" content="快速幂,">
+  <meta name="keywords" content="LCA,">
 
 
 
@@ -124,18 +124,18 @@
 
 
 
-<meta name="description" content="介绍顾名思义，快速幂就是快速算底数的 $n$ 次幂。其时间复杂度为 $O(log₂N)$， 与朴素的 $O(N)$ 相比效率有了极大的提高。(N 为幂)$x^{b} % mod$ 非递归12345678910const long long mod = 114514;inline long long mod_pow(long long x, long long b) &amp;#123;  long lon">
-<meta name="keywords" content="快速幂">
+<meta name="description" content="题意给一棵树, 要求三个节点的人聚合在一起的最小路程和. 思路设 $x$ 和 $y$ 先在一起, 再和 $z$ 聚会  考虑两种方案:  $x$ 和 $y$ 到 $z$ 的位置消耗距离 $= 2 * dist(xy, z)$  $z$ 到 $x$ 和 $y$ 号的位置消耗距离 $= dist(xy, z)$   显然方案一更优. 综上所述,同理其他两种方案也可以得出:  $x$ , $y$ 先在一">
+<meta name="keywords" content="LCA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速幂">
-<meta property="og:url" content="http://yoursite.com/2019/10/08/快速幂/index.html">
+<meta property="og:title" content="聚会">
+<meta property="og:url" content="http://yoursite.com/2019/10/23/聚会/index.html">
 <meta property="og:site_name" content="ckyanos&#39;s blog">
-<meta property="og:description" content="介绍顾名思义，快速幂就是快速算底数的 $n$ 次幂。其时间复杂度为 $O(log₂N)$， 与朴素的 $O(N)$ 相比效率有了极大的提高。(N 为幂)$x^{b} % mod$ 非递归12345678910const long long mod = 114514;inline long long mod_pow(long long x, long long b) &amp;#123;  long lon">
+<meta property="og:description" content="题意给一棵树, 要求三个节点的人聚合在一起的最小路程和. 思路设 $x$ 和 $y$ 先在一起, 再和 $z$ 聚会  考虑两种方案:  $x$ 和 $y$ 到 $z$ 的位置消耗距离 $= 2 * dist(xy, z)$  $z$ 到 $x$ 和 $y$ 号的位置消耗距离 $= dist(xy, z)$   显然方案一更优. 综上所述,同理其他两种方案也可以得出:  $x$ , $y$ 先在一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-08T05:24:06.264Z">
+<meta property="og:updated_time" content="2019-10-24T07:30:46.784Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="快速幂">
-<meta name="twitter:description" content="介绍顾名思义，快速幂就是快速算底数的 $n$ 次幂。其时间复杂度为 $O(log₂N)$， 与朴素的 $O(N)$ 相比效率有了极大的提高。(N 为幂)$x^{b} % mod$ 非递归12345678910const long long mod = 114514;inline long long mod_pow(long long x, long long b) &amp;#123;  long lon">
+<meta name="twitter:title" content="聚会">
+<meta name="twitter:description" content="题意给一棵树, 要求三个节点的人聚合在一起的最小路程和. 思路设 $x$ 和 $y$ 先在一起, 再和 $z$ 聚会  考虑两种方案:  $x$ 和 $y$ 到 $z$ 的位置消耗距离 $= 2 * dist(xy, z)$  $z$ 到 $x$ 和 $y$ 号的位置消耗距离 $= dist(xy, z)$   显然方案一更优. 综上所述,同理其他两种方案也可以得出:  $x$ , $y$ 先在一">
 
 
 
@@ -165,13 +165,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/08/快速幂/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/23/聚会/">
 
 
 
 
 
-  <title>快速幂 | ckyanos's blog</title>
+  <title>聚会 | ckyanos's blog</title>
   
 
 
@@ -348,7 +348,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/快速幂/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/23/聚会/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ckyanos">
@@ -365,7 +365,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">快速幂</h1>
+          <h1 class="post-title" itemprop="name headline">聚会</h1>
         
 
         <div class="post-meta">
@@ -377,8 +377,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T00:00:00+08:00">
-                2019-10-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-23T00:00:00+08:00">
+                2019-10-23
               </time>
             
 
@@ -400,8 +400,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数论/" itemprop="url" rel="index">
-                    <span itemprop="name">数论</span>
+                  <a href="/categories/21届训练/" itemprop="url" rel="index">
+                    <span itemprop="name">21届训练</span>
                   </a>
                 </span>
 
@@ -442,9 +442,23 @@
       
 
       
-        <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>顾名思义，快速幂就是快速算底数的 $n$ 次幂。其时间复杂度为 $O(log₂N)$， 与朴素的 $O(N)$ 相比效率有了极大的提高。<br>(N 为幂)<br>$x^{b} % mod$</p>
-<h4 id="非递归"><a href="#非递归" class="headerlink" title="非递归"></a>非递归</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">long</span> mod = <span class="number">114514</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="title">mod_pow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> x, <span class="keyword">long</span> <span class="keyword">long</span> b)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">long</span> <span class="keyword">long</span> res =  <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>(b) &#123;</span><br><span class="line">    <span class="keyword">if</span>(n &amp; <span class="number">1</span>) res = res * x % mod;</span><br><span class="line">    x = x * x % mod;</span><br><span class="line">    n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">long</span> mod = <span class="number">114514</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="title">mod_pow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> x, <span class="keyword">long</span> <span class="keyword">long</span> b)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(b == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">long</span> <span class="keyword">long</span> res = mod_pow(x * x % mod, n / <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">if</span>(n &amp; <span class="number">1</span>) res = res * x % mod;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>给一棵树, 要求三个节点的人聚合在一起的最小路程和.</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>设 $x$ 和 $y$ 先在一起, 再和 $z$ 聚会 </p>
+<p>考虑两种方案:</p>
+<ol>
+<li><p>$x$ 和 $y$ 到 $z$ 的位置<br>消耗距离 $= 2 * dist(xy, z)$</p>
+</li>
+<li><p>$z$ 到 $x$ 和 $y$ 号的位置<br>消耗距离 $= dist(xy, z)$</p>
+</li>
+</ol>
+<p>显然方案一更优.</p>
+<p>综上所述,同理其他两种方案也可以得出:</p>
+<ol>
+<li>$x$ , $y$ 先在一起</li>
+<li>$x$ , $z$ 先在一起</li>
+<li>$y$ , $z$ 先在一起</li>
+</ol>
+<h4 id="Code"><a href="#Code" class="headerlink" title="Code:"></a>Code:</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line">                                                                                                                                                                    </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> s = <span class="number">0</span>, w = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span>(ch &lt; <span class="string">'0'</span>|| ch &gt; <span class="string">'9'</span>) &#123;<span class="keyword">if</span>(ch == <span class="string">'-'</span>)w = <span class="number">-1</span>; ch = getchar();&#125;</span><br><span class="line">	<span class="keyword">while</span>(ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)s = s * <span class="number">10</span> + ch - <span class="string">'0'</span>, ch = getchar();</span><br><span class="line">	<span class="keyword">return</span> s * w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> head[N], Next[N], ver[N], edge[N], tot;</span><br><span class="line"><span class="keyword">int</span> dep[N], f[N][<span class="number">22</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y;</span><br><span class="line">	Next[tot] = head[x];</span><br><span class="line">	head[x] = tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> father)</span> </span>&#123;</span><br><span class="line">	dep[x] = dep[father] + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">21</span>; i++) &#123;</span><br><span class="line">		f[x][i] = f[f[x][i - <span class="number">1</span>]][i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = Next[i]) &#123;</span><br><span class="line">		<span class="keyword">int</span> y = ver[i];</span><br><span class="line">		<span class="keyword">if</span>(y == father)<span class="keyword">continue</span>;</span><br><span class="line">		f[y][<span class="number">0</span>] = x;</span><br><span class="line">		dfs(y, x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">LCA</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(dep[x] &lt; dep[y])swap(x, y);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">21</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">		<span class="keyword">if</span>(dep[f[x][i]] &gt;= dep[y]) &#123;</span><br><span class="line">			x = f[x][i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(x == y)<span class="keyword">return</span> x;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">21</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">		<span class="keyword">if</span>(f[x][i] != f[y][i]) &#123;</span><br><span class="line">			x = f[x][i];</span><br><span class="line">			y = f[y][i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> f[x][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">dist</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> dep[x] + dep[y] - <span class="number">2</span> * dep[LCA(x, y)];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = read(); m = read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> x = read(), y = read();</span><br><span class="line">		add(x, y); add(y, x);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	dfs(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> Dis = <span class="number">0x3f3f3f3f</span>, Pos;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> x = read(), y = read(), z = read();</span><br><span class="line">		<span class="keyword">int</span> xy = LCA(x, y), xz = LCA(x, z), yz = LCA(y, z);</span><br><span class="line">		<span class="keyword">int</span> <span class="built_in">cos</span> = dist(x, y);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (dep[xy] &lt; dep[yz]) &#123;</span><br><span class="line">			xy = yz;</span><br><span class="line">			<span class="built_in">cos</span> = dist(y, z);</span><br><span class="line">			z = x;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (dep[xy] &lt; dep[xz]) &#123;</span><br><span class="line">			xy = xz;</span><br><span class="line">			<span class="built_in">cos</span> = dist(x, z);</span><br><span class="line">			z = y;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cos</span> += dist(z, xy);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, xy, <span class="built_in">cos</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -462,7 +476,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/快速幂/" rel="tag"><i class="fa fa-tag"></i> 快速幂</a>
+            <a href="/tags/LCA/" rel="tag"><i class="fa fa-tag"></i> LCA</a>
           
         </div>
       
@@ -475,8 +489,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/08/链表/" rel="next" title="链表">
-                <i class="fa fa-chevron-left"></i> 链表
+              <a href="/2019/10/23/黑盒子/" rel="next" title="黑盒子">
+                <i class="fa fa-chevron-left"></i> 黑盒子
               </a>
             
           </div>
@@ -484,10 +498,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/08/并查集/" rel="prev" title="并查集">
-                并查集 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -656,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非递归"><span class="nav-number">2.</span> <span class="nav-text">非递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#递归"><span class="nav-number">3.</span> <span class="nav-text">递归</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题意"><span class="nav-number">1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code:</span></a></li></ol></div>
             
 
           </div>
