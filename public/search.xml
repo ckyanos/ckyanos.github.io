@@ -3,12 +3,23 @@
   <entry>
     <title><![CDATA[最长上升子序列]]></title>
     <url>%2F2019%2F10%2F31%2F%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%2F</url>
-    <content type="text"><![CDATA[基本思路状态表示: $f[i]$ 为以 $a[i]$ 结尾的最长上升子序列的长度阶段划分: 子序列的结尾位置状态转移方程:f[i] = max (f[i], f[j] + 1)$(0 \le j \le i, a[j] \le a[i])$ 边界:$f[0] = 0, f[i] = 1$目标: $max_{1 \le i \le n}${$f[i]$} Code: 1234567891011121314151617181920212223242526272829303132#include&lt;iostream&gt;#include&lt;cstdio&gt;const int N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9') &#123;if(ch == '-')w = -1;ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;int n, a[N], f[N], ans;int main() &#123; n = read(); for(int i = 1; i &lt;= n; i++)a[i] = read(), f[i] = 1; for(int i = 1; i &lt;= n; i++) &#123; for(int j = 1; j &lt;= i; j++) &#123; if(a[j] &lt; a[i]) &#123; f[i] = std::max(f[i], f[j] + 1); &#125; &#125; &#125; for(int i = 1; i &lt;= n; i++) &#123; ans = std::max(ans, f[i]); &#125; printf("%d\n", ans); return 0; &#125;]]></content>
+    <content type="text"><![CDATA[DP状态表示: $f[i]$ 为以 $a[i]$ 结尾的最长上升子序列的长度阶段划分: 子序列的结尾位置状态转移方程:f[i] = max (f[i], f[j] + 1)$(0 \le j \le i, a[j] \le a[i])$ 边界:$f[0] = 0, f[i] = 1$目标: $max_{1 \le i \le n}${$f[i]$} Code:1234567891011121314151617181920212223242526272829303132#include&lt;iostream&gt;#include&lt;cstdio&gt;const int N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9') &#123;if(ch == '-')w = -1;ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;int n, a[N], f[N], ans;int main() &#123; n = read(); for(int i = 1; i &lt;= n; i++)a[i] = read(), f[i] = 1; for(int i = 1; i &lt;= n; i++) &#123; for(int j = 1; j &lt;= i; j++) &#123; if(a[j] &lt; a[i]) &#123; f[i] = std::max(f[i], f[j] + 1); &#125; &#125; &#125; for(int i = 1; i &lt;= n; i++) &#123; ans = std::max(ans, f[i]); &#125; printf("%d\n", ans); return 0; &#125; 二分 + 贪心Code:12345678910111213141516171819202122232425262728293031#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;algorithm&gt;const int N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9') &#123;if(ch == '-')w = -1;ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;int n, a[N], q[N], top;int main() &#123; n = read(); for(int i = 1; i &lt;= n; i++)a[i] = read(); q[top] = -0x3f3f3f3f; for(int i = 1; i &lt;= n; i++) &#123; if(a[i] &gt; q[top]) &#123; q[++top] = a[i]; continue; &#125; int pos = std::lower_bound(q + 1, q + 1 + top, a[i]) - q; q[pos] = a[i]; &#125; printf("%d\n", top); return 0;&#125; 树状数组Code:1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define lowbit(x) x &amp; -xusing namespace std;const int N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt;'9') &#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;int c[N], a[N], b[N];int n, m, ans;inline void add(int x, int y) &#123; for(; x &lt;= n; x += lowbit(x)) &#123; c[x] = max(c[x], y); &#125;&#125;inline int ask(int x) &#123; int res = 0; for(; x; x -= lowbit(x)) &#123; res = max(res, c[x]); &#125; return res;&#125;int main() &#123; n = read(); for(int i = 1; i &lt;= n; i++) &#123; a[i] = b[i] = read(); &#125; sort(b + 1, b + 1 + n); m = unique(b + 1, b + 1 + n) - (b + 1); for(int i = 1; i &lt;= n; i++) &#123; a[i] = lower_bound(b + 1, b + 1 + m, a[i]) - b; &#125; for(int i = 1; i &lt;= n; i++) &#123; int y = ask(a[i] - 1) + 1; ans = max(ans, y); add(a[i], y); &#125; printf("%d\n", ans); return 0;&#125;]]></content>
       <categories>
         <category>动态规划</category>
       </categories>
       <tags>
         <tag>LIS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LCA最近公共祖先]]></title>
+    <url>%2F2019%2F10%2F28%2FLCA%2F</url>
+    <content type="text"><![CDATA[性质 $LCA(u) = u$; $u$ 是 $v$ 的祖先，当且仅当 $LCA(u, v) = u$ ； 如果 $u$ 不为 $v$ 的祖先并且 $v$ 不为 $u$ 的祖先，那么 $u , v$ 分别处于 $LCA(u, v)$ 的两棵不同子树中； 前序遍历中， $LCA(s$ 出现在所有 $S$ 中元素之前，后序遍历中 $LCA(s)$ 则出现在所有 $s$ 中元素之后； 点集并的最近公共祖先为两点集分别的最近公共祖先的最近公共祖先,即 $LCA(A ∪ B) = LCA(LCA(A), LCA(B)) $ 两点的最近公共祖先必定处在树上两点间的最短路上； $dist(u, v) = dep[u] + dep[v] - 2 * dep[LCA(u, v)]$, $dep$代表某点到树跟的距离(树的深度) 倍增算法LCA123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;queue&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt; using namespace std;const int N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9') &#123;if(ch == '-')w = -1;ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;int n, m;int head[N], Next[N], ver[N], edge[N], tot;int dep[N], f[N][22], p[N];inline void add(int x, int y) &#123; ver[++tot] = y; Next[tot] =head[x]; head[x] = tot;&#125;inline void dfs(int x, int fa) &#123; dep[x] = dep[fa] + 1; for(int i = 1; i &lt;= 21; i++) &#123; f[x][i] = f[f[x][i - 1]][i - 1]; //.. if(!f[x][i])break; &#125; for(int i = head[x]; i; i = Next[i]) &#123; int y = ver[i]; if(y == fa)continue; f[y][0] = x; //... dfs(y, x); &#125;&#125;inline int LCA(int x, int y) &#123; if(dep[x] &lt; dep[y])swap(x, y); for(int i = 21; i &gt;= 0; i--) &#123; if(dep[f[x][i]] &gt;= dep[y]) &#123; //.. x = f[x][i]; &#125; if(x == y) return x; //... &#125; for(int i = 21; i &gt;= 0; i--) &#123; if(f[x][i] != f[y][i]) &#123; //... x = f[x][i]; y = f[y][i]; &#125; &#125; //... return f[x][0];&#125;int main() &#123; n = read(); for(int i = 1; i &lt; n; i++) &#123; int x = read(), y = read(); add(x, y); add(y, x); &#125; dfs(1, 0); m = read(); for(int i = 1; i &lt;= m; i++) &#123; int x = read(), y = read(); printf("%d\n", LCA(x, y)); &#125; return 0;&#125; 点的距离123inline int dist(int x, int y) &#123; return dep[x] + dep[y] - 2 * dep[LCA(X, y)];&#125;]]></content>
+      <categories>
+        <category>图论</category>
+      </categories>
+      <tags>
+        <tag>LCA</tag>
       </tags>
   </entry>
   <entry>
@@ -22,17 +33,6 @@
         <tag>倍增</tag>
         <tag>ST表</tag>
         <tag>RMQ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LCA最近公共祖先]]></title>
-    <url>%2F2019%2F10%2F28%2FLCA%2F</url>
-    <content type="text"><![CDATA[性质 $LCA(u) = u$; $u$ 是 $v$ 的祖先，当且仅当 $LCA(u, v) = u$ ； 如果 $u$ 不为 $v$ 的祖先并且 $v$ 不为 $u$ 的祖先，那么 $u , v$ 分别处于 $LCA(u, v)$ 的两棵不同子树中； 前序遍历中， $LCA(s$ 出现在所有 $S$ 中元素之前，后序遍历中 $LCA(s)$ 则出现在所有 $s$ 中元素之后； 点集并的最近公共祖先为两点集分别的最近公共祖先的最近公共祖先,即 $LCA(A ∪ B) = LCA(LCA(A), LCA(B)) $ 两点的最近公共祖先必定处在树上两点间的最短路上； $dist(u, v) = dep[u] + dep[v] - 2 * dep[LCA(u, v)]$, $dep$代表某点到树跟的距离(树的深度) 倍增算法LCA123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;queue&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt; using namespace std;const int N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9') &#123;if(ch == '-')w = -1;ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;int n, m;int head[N], Next[N], ver[N], edge[N], tot;int dep[N], f[N][22], p[N];inline void add(int x, int y) &#123; ver[++tot] = y; Next[tot] =head[x]; head[x] = tot;&#125;inline void dfs(int x, int fa) &#123; dep[x] = dep[fa] + 1; for(int i = 1; i &lt;= 21; i++) &#123; f[x][i] = f[f[x][i - 1]][i - 1]; //.. if(!f[x][i])break; &#125; for(int i = head[x]; i; i = Next[i]) &#123; int y = ver[i]; if(y == fa)continue; f[y][0] = x; //... dfs(y, x); &#125;&#125;inline int LCA(int x, int y) &#123; if(dep[x] &lt; dep[y])swap(x, y); for(int i = 21; i &gt;= 0; i--) &#123; if(dep[f[x][i]] &gt;= dep[y]) &#123; //.. x = f[x][i]; &#125; if(x == y) return x; //... &#125; for(int i = 21; i &gt;= 0; i--) &#123; if(f[x][i] != f[y][i]) &#123; //... x = f[x][i]; y = f[y][i]; &#125; &#125; //... return f[x][0];&#125;int main() &#123; n = read(); for(int i = 1; i &lt; n; i++) &#123; int x = read(), y = read(); add(x, y); add(y, x); &#125; dfs(1, 0); m = read(); for(int i = 1; i &lt;= m; i++) &#123; int x = read(), y = read(); printf("%d\n", LCA(x, y)); &#125; return 0;&#125; 点的距离123inline int dist(int x, int y) &#123; return dep[x] + dep[y] - 2 * dep[LCA(X, y)];&#125;]]></content>
-      <categories>
-        <category>图论</category>
-      </categories>
-      <tags>
-        <tag>LCA</tag>
       </tags>
   </entry>
   <entry>
@@ -97,6 +97,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[背包]]></title>
+    <url>%2F2019%2F10%2F13%2F%E8%83%8C%E5%8C%85%2F</url>
+    <content type="text"><![CDATA[0/1背包问题题目有 $N$ 件物品和一个容量为 $V$ 的背包。第 $i$ 件物品的费用是 $c[i]$，价值是 $w[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 状态转移方程1f[i][j] = max(f[i - 1][j], f[i - 1][j - c[i] + w[i]]); 时间复杂度 $O(nV)$ Code:123456789101112const int N = 1e6 + 10;int f[N];inline void dp() &#123; for(int i = 1; i &lt;= n; i++) for(int j = V; j &gt;= v[i]; j--) &#123; f[j] = max(f[j], f[j - c[i]] + w[i]); &#125; for(int i = 0; i &lt;= V; i++) &#123; ans = max(ans, f[i]); &#125;&#125; 完全背包问题题目有 $N$ 件物品和一个容量为 $V$ 的背包，每种物品都有无限件可用。第 $i$ 件物品的费用是 $c[i]$，价值是 $w[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 状态转移方程12f[j] = max(f[j], f[j - c[i]] + w[i]);// 0 &lt;= k * c[i] &lt;= v Code:123456789101112const int N = 1e6 + 10;int f[N], ans;inline void dp() &#123; for(int i = 1; i &lt;= n; i++) for(int j = c[i]; j &lt;= V; j++) &#123; f[j] = max(f[j], f[j - c[i]] + w[i]); &#125; for(int i = 0; i &lt;= V; i++) &#123; ans = max(ans, f[i]); &#125;&#125; 多重背包问题题目有 $N$ 种物品和一个容量为 $V$ 的背包。第 $i$ 种物品最多有 $n[i]$ 件可用，每件费用是 $c[i]$ ，价值是 $w[i]$ 。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 状态转移方程Code:12345678910111213const int N = 1e6 + 10;int f[N], ans;inline void dp() &#123; for(int i = 1; i &lt;= n; i++) for(int j = 1; j &lt;=n[i]; j++) for(int k = V; k &gt;= c[i]; k--) &#123; f[k] = max(f[k], f[k - c[i] + w[i]); &#125; for(int i = 0; i &lt;= V; i++) &#123; ans = max(ans, f[i]); &#125;&#125;]]></content>
+      <categories>
+        <category>动态规划</category>
+      </categories>
+      <tags>
+        <tag>背包</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[割点和桥]]></title>
     <url>%2F2019%2F10%2F13%2F%E5%89%B2%E8%BE%B9%E4%B8%8E%E6%A1%A5%2F</url>
     <content type="text"><![CDATA[概念引入时间戳dfn[x]$dfn[x]$ 优先深度遍历中每个节点第一次被访问的时间顺序 搜索树在无向连通图中任选一个节点进行深度优先遍历,每个节点只被访问一次.所有发生递归的边 $(x, y)$ 构成一棵树。我们把它成为无向连通图的搜索树。当然,一般无向图(不一定连通)的各个连通块的搜索树构成无向图的”搜索森林” 追溯值low[x]设 $subtree(x)$ 为以 $x$ 根节点的子树$low[x]$ 定义为以下节点的时间戳的最小值: 1.$subtree(x)$ 中的节点 2.通过 1 条不在搜索树上的边,能够到达 $subtree(x)$ 的节点. low[x]的计算:初始化 low[x] = dfn[x] 1.如果 x = root(y) low[x] = min(low[x], low[y]) 2.如果无向边(x, y)不是搜索树的边 low[x] = min(low[x], dfn[y]); 割边割边定义若对于 $e ∈ E$ ,从图中删去边 $e$ 之后, $G$ 分裂成两个不相连的子图, 则称 $e$ 为 $G$ 的桥或割边。 割边判定法则无向边(x, y)是桥, 当且仅当搜索树上存在 x 的一个子节点 y, 满足:1dfn[x] &lt; low[y] 性质桥一定是搜索树中的边,并且一个简单环中的便一定都不是桥. Code:1234567891011121314151617181920212223242526272829303132333435363738394041424344454647const int N = 1e6 + 10;int head[N], Next[N], ver[N], edge[N], tot, num;int dfn[x], low[x];bool bridge[N];inline void add(int x, int y) &#123; ver[++tot] = y; Next[tot] = head[x]; head[x] = tot;&#125;inline void tarjan(int x, int in_edge) &#123; dfn[x] = low[x] = ++num; for(int i = head[x]; i; i = Next[i]) &#123; int y = ver[i]; if(!dfn[y]) &#123; tarjan(y, i); low[x] = min(low[x], low[y]); if(low[y] &gt; dfn[x]) &#123; bridge[i] = bridge[i ^ 1] = true; &#125; &#125; else if(i != (in_edge ^ 1)) &#123; low[x] = min(low[x], dfn[y]); &#125; &#125;&#125;int main() &#123; n = read(); m = read(); tot = 1; for(int i = 1; i &lt;= m; i++) &#123; int x = read(), y = read(); add(x, y); add(y, x); &#125; for(int i = 1; i &lt;= n; i++) &#123; if(!dfn[i])tarjan(i, 0); &#125; for(int i = 2; i &lt; tot; i += 2) &#123; if(bridge[i]) &#123; printf("%d %d\n", ver[i ^ 1], ver[i]); &#125; &#125;&#125; 割点定义在无向联通图 $G = (V,E)$ 中: 若对于 $x ∈ V$ ， 从图中删去节点x以及所有与 $x$ 关联的边之后, $G$ 分裂成两个或两个以上不相连的子图， 则称 $x$ 为 $G$ 的割点。 割点判定法则若 $x$ 不是搜索树的根节点(优先深度遍历的起点), 则 $x$ 是割点当且仅当搜索树上存在 $x$ 的一个子节点 $y$满足:1dfn[x] &lt;= low[y] 特别的, 若 $x$ 是搜索树的根节点, 则 $x$ 是割点当且仅当搜索树上存在 $x$ 的两个个子节点 $y_{1}$ $y_{2}$ 满足上述条件 Code:123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051const int N = 1e6 + 10;int head[N], Next[N], ver[N], edge[N], tot, num;int dfn[x], low[x];bool cut[N];inline void add(int x, int y) &#123; ver[++tot] = y; Next[tot] = head[x]; head[x] = tot;&#125;inline void tarjan(int x) &#123; dfn[x] = low[x] = ++num; int flag = 0; for(int i = head[x]; i; i = Next[i]) &#123; int y = ver[i]; if(!dfn[x]) &#123; tarjan(y); low[x] = min(low[x], low[y]); &#125; if(low[y] &gt;= dfn[x]) &#123; flag++; if(x != root || flag &gt; 1) &#123; cut[x] = true; &#125; &#125; else &#123; low[x] = min(low[x], dfn[y]); &#125; &#125;&#125;int main() &#123; n = read(); m = read(); tot = 1; for(int i = 1; i &lt;= m; i++) &#123; int x = read(), y = read(); if(x == y)continue; add(x, y); add(y, x); &#125; for(int i = 1; i &lt;= n; i++) &#123; if(!dfn[i])tarjan(i); &#125; for(int i = 2; i &lt; tot; i += 2) &#123; if(cut[i]) &#123; printf("%d\n", i); &#125; &#125;&#125;]]></content>
@@ -119,17 +130,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[背包]]></title>
-    <url>%2F2019%2F10%2F13%2F%E8%83%8C%E5%8C%85%2F</url>
-    <content type="text"><![CDATA[0/1背包问题题目有 $N$ 件物品和一个容量为 $V$ 的背包。第 $i$ 件物品的费用是 $c[i]$，价值是 $w[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 状态转移方程1f[i][j] = max(f[i - 1][j], f[i - 1][j - c[i] + w[i]]); 时间复杂度 $O(nV)$ Code:123456789101112const int N = 1e6 + 10;int f[N];inline void dp() &#123; for(int i = 1; i &lt;= n; i++) for(int j = V; j &gt;= v[i]; j--) &#123; f[j] = max(f[j], f[j - c[i]] + w[i]); &#125; for(int i = 0; i &lt;= V; i++) &#123; ans = max(ans, f[i]); &#125;&#125; 完全背包问题题目有 $N$ 件物品和一个容量为 $V$ 的背包，每种物品都有无限件可用。第 $i$ 件物品的费用是 $c[i]$，价值是 $w[i]$。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 状态转移方程12f[j] = max(f[j], f[j - c[i]] + w[i]);// 0 &lt;= k * c[i] &lt;= v Code:123456789101112const int N = 1e6 + 10;int f[N], ans;inline void dp() &#123; for(int i = 1; i &lt;= n; i++) for(int j = c[i]; j &lt;= V; j++) &#123; f[j] = max(f[j], f[j - c[i]] + w[i]); &#125; for(int i = 0; i &lt;= V; i++) &#123; ans = max(ans, f[i]); &#125;&#125; 多重背包问题题目有 $N$ 种物品和一个容量为 $V$ 的背包。第 $i$ 种物品最多有 $n[i]$ 件可用，每件费用是 $c[i]$ ，价值是 $w[i]$ 。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 状态转移方程Code:12345678910111213const int N = 1e6 + 10;int f[N], ans;inline void dp() &#123; for(int i = 1; i &lt;= n; i++) for(int j = 1; j &lt;=n[i]; j++) for(int k = V; k &gt;= c[i]; k--) &#123; f[k] = max(f[k], f[k - c[i] + w[i]); &#125; for(int i = 0; i &lt;= V; i++) &#123; ans = max(ans, f[i]); &#125;&#125;]]></content>
-      <categories>
-        <category>动态规划</category>
-      </categories>
-      <tags>
-        <tag>背包</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[线段树]]></title>
     <url>%2F2019%2F10%2F12%2F%E7%BA%BF%E6%AE%B5%E6%A0%91%2F</url>
     <content type="text"><![CDATA[定义线段树是一种二叉搜索树，与区间树相似，它将一个区间划分成一些单元区间，每个单元区间对应线段树中的一个叶结点。使用线段树可以快速的查找某一个节点在若干条线段中出现的次数，时间复杂度为 $O(logN)$。而未优化的空间复杂度为 $2N$，实际应用时一般还要开 $4N$ 的数组以免越界，因此有时需要离散化让空间压缩。 区间修改 区间查询123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778#include&lt;iostream&gt;#include&lt;cstdio&gt;#define ls x &lt;&lt; 1#define rs x &lt;&lt; 1 | 1#define push_up(x) ans[x] = ans[ls] + ans[rs]typedef long long ll;const int N = 1e6 + 10;ll a[N], add[N * 4], ans[N * 4];inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;inline void build(int x, int l, int r) &#123; add[x] = 0; if(l == r) &#123; ans[x] = a[l]; return ; &#125; int mid = (l + r) &gt;&gt; 1; build(ls, l, mid); build(rs, mid + 1, r); push_up(x);&#125;inline void push_down(int x, int l, int r) &#123; int mid = (l + r) &gt;&gt; 1; add[ls] += add[x]; add[rs] += add[x]; ans[ls] += ( add[x] * (mid - l + 1) ); ans[rs] += ( add[x] * (r - mid) ); add[x] = 0;&#125;inline void addup(int nl, int nr, int l, int r, int x, ll k) &#123; if(nl &lt;= l &amp;&amp; r &lt;= nr) &#123; ans[x] += k * (r - l + 1); add[x] += k; return ; &#125; push_down(x, l, r); int mid = (l + r) &gt;&gt; 1; if(nl &lt;= mid) addup(nl, nr, l, mid, ls, k); if(mid + 1 &lt;= nr) addup(nl, nr, mid + 1, r, rs, k); push_up(x); &#125;inline ll query(int ql, int qr, int l, int r, int x) &#123; ll res = 0; if(ql &lt;= l &amp;&amp; r &lt;= qr) &#123; return ans[x]; &#125; int mid = (l + r) &gt;&gt; 1; push_down(x, l, r); if(ql &lt;= mid) res += query(ql, qr, l, mid, ls); if(mid + 1 &lt;= qr) res += query(ql, qr, mid + 1, r, rs); return res;&#125;int n, m;int main() &#123; n = read(); m = read(); for(int i = 1; i &lt;= n; i++) a[i] = read(); build(1, 1, n); for(int i = 1; i &lt;= m; i++) &#123; int judge = read(), x = read(), y = read(); ll k; if(judge == 1) &#123; k = read(); addup(x, y, 1, n, 1, k); &#125; if(judge == 2) &#123; ll ans = query(x, y, 1, n, 1); printf("%lld\n", ans); &#125; &#125; return 0;&#125;]]></content>
@@ -138,6 +138,83 @@
       </categories>
       <tags>
         <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[快速幂]]></title>
+    <url>%2F2019%2F10%2F08%2F%E5%BF%AB%E9%80%9F%E5%B9%82%2F</url>
+    <content type="text"><![CDATA[介绍顾名思义，快速幂就是快速算底数的 $n$ 次幂。其时间复杂度为 $O(log₂N)$， 与朴素的 $O(N)$ 相比效率有了极大的提高。(N 为幂)$x^{b} % mod$ 非递归12345678910const long long mod = 114514;inline long long mod_pow(long long x, long long b) &#123; long long res = 1; while(b) &#123; if(n &amp; 1) res = res * x % mod; x = x * x % mod; n &gt;&gt;= 1; &#125; return res;&#125; 递归1234567const long long mod = 114514;inline long long mod_pow(long long x, long long b) &#123; if(b == 0)return 1; long long res = mod_pow(x * x % mod, n / 2); if(n &amp; 1) res = res * x % mod; return res;&#125;]]></content>
+      <categories>
+        <category>数论</category>
+      </categories>
+      <tags>
+        <tag>快速幂</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[并查集]]></title>
+    <url>%2F2019%2F10%2F08%2F%E5%B9%B6%E6%9F%A5%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[介绍并查集，在一些有N个元素的集合应用问题中，我们通常是在开始时让每个元素构成一个单元素的集合，然后按一定顺序将属于同一组的元素所在的集合合并，其间要反复查找一个元素在哪个集合中。这一类问题近几年来反复出现在信息学的国际国内赛题中，其特点是看似并不复杂，但数据量极大，若用正常的数据结构来描述的话，往往在空间上过大，计算机无法承受；即使在空间上勉强通过，运行的时间复杂度也极高，根本就不可能在比赛规定的运行时间（1～3秒）内计算出试题需要的结果，只能用并查集来描述。并查集是一种树型的数据结构，用于处理一些不相交集合（Disjoint Sets）的合并及查询问题。常常在使用中以森林来表示。 操作123456789#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;int fa[N], n, m;inline void init() &#123; for(int i = 1; i &lt;= n + 10; i++)fa[i] = i;&#125; get1234inline int get(int x) &#123; if(fa[x] == x)return x; return fa[x] = get(fa[x]);&#125; merge123inline void merge(int x, int y) &#123; fa[get(x)] = get(y);&#125; same123inline bool same(int x, int y) &#123; return get(x) == get(y);&#125;]]></content>
+      <categories>
+        <category>高等数据结构</category>
+      </categories>
+      <tags>
+        <tag>并查集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[队列]]></title>
+    <url>%2F2019%2F10%2F08%2F%E9%98%9F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[定义队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操作的端称为队头。队列中没有元素时，称为空队列。队列的数据元素又称为队列元素。在队列中插入一个队列元素称为入队，从队列中删除一个队列元素称为出队。因为队列只允许在一端插入，在另一端删除，所以只有最早进入队列的元素才能最先从队列中删除，故队列又称为先进先出（FIFO—first in first out）线性表。 数组实现1234567891011const int N = 1e6 + 10;int q[N], head, tail;inline void push(int x) &#123; q[++tail] = x;&#125;inline int top() &#123; return q[tail];&#125;inline void pop(int x) &#123; head++;&#125; STL实现1234#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;queue&lt;int&gt; q; 入队:1q.push(x); 出队:1q.pop(); 返回队头：1int x = q.front(); 返回队列的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
+      <categories>
+        <category>基本数据结构</category>
+      </categories>
+      <tags>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[质数]]></title>
+    <url>%2F2019%2F10%2F08%2F%E8%B4%A8%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[定义质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。 质数检验普通12345678inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; for(int i = 2; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 简单优化123456789inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; if(n % 2 == 0)return false; for(int i = 3; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 质数表埃氏筛法1234567891011bool v[N];inline int prime(int n) &#123; memset(v, true, v); v[0] = v[1] = 0; for(int i = 2; i &lt;= n; i++) &#123; if(!v[i])continue; for(int j = i; j &lt;= n / i; j++) &#123; v[j] = false; &#125; &#125;&#125; 欧拉筛法123456789101112131415161718int v[N], prime[N];inilne void primes(int n) &#123; memset(v, 0, sizeof v); int cnt = 0;//质数个数 for(int i = 2; i &lt;= n; i++) &#123; if(v[i])continue; v[i] = i; prime[++tot] = i; for(int j = 1; j &lt;= tot; j++) &#123; if(prime[j] &gt; v[i] || prime[j] &gt; n / i)break; v[i * prime[j]] = prime[j]; &#125; &#125; for(int i = 1; i &lt;= tot; i++) &#123; printf("%d\n", prime[i]); &#125; return &#125;]]></content>
+      <categories>
+        <category>数论</category>
+      </categories>
+      <tags>
+        <tag>质数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[约数]]></title>
+    <url>%2F2019%2F10%2F08%2F%E7%BA%A6%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[定义约数，又称因数。整数a除以整数b(b≠0) 除得的商正好是整数而没有余数，我们就说a能被b整除，或b能整除a。a称为b的倍数，b称为a的约数。在大学之前，”约数”一词所指的一般只限于正约数。约数和倍数都是二元关系的概念，不能孤立地说某个整数是约数或倍数。一个整数的约数是有限的。同时，它可以在特定情况下成为公约数。 欧几里得算法(辗转相除法)循环写法1234567891011inline int gcd(int a, int b) &#123; if(a &lt; b)swap(a, b); int res = 0; while(b) &#123; res = a % b; a = b; b = res; &#125; return b;&#125; 递归写法1234inline int gcd(int a, int b) &#123; return b ? gcd(b, a % b) : a;&#125;]]></content>
+      <categories>
+        <category>数论</category>
+      </categories>
+      <tags>
+        <tag>约数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[vector]]></title>
+    <url>%2F2019%2F10%2F08%2Fvector%2F</url>
+    <content type="text"><![CDATA[定义向量（Vector）是一个封装了动态大小数组的顺序容器（Sequence Container）。跟任意其它类型容器一样，它能够存放各种类型的对象。可以简单的认为，向量是一个能够存放任意类型的动态数组。 vector的使用方法1234#include&lt;iostream&gt;#include&lt;vector&gt;using namespace std;vector&lt;int&gt;V; 返回向量个数:1return V.size(); 在向量末尾添加元素:1V.push_back(x); 删除向量最后一个元素:1V.pop_back(); 返回指向向量开头的迭代器:1return V.begin(); 返回指向向量末尾的迭代器:1return V.end(); 在向量的位置 p 处 插入元素 x:1V.insert(p, x); 删除向量位置 p 处 的元素:1V.erase(p); 删除向量中所有元素:1V.clear();]]></content>
+      <categories>
+        <category>基本数据结构</category>
+      </categories>
+      <tags>
+        <tag>vector</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[栈]]></title>
+    <url>%2F2019%2F10%2F08%2F%E6%A0%88%2F</url>
+    <content type="text"><![CDATA[定义栈作为一种数据结构，是一种只能在一端进行插入和删除操作的特殊线性表。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。栈具有记忆作用，对栈的插入与删除操作中，不需要改变栈底指针。栈是允许在同一端进行插入和删除操作的特殊线性表。允许进行插入和删除操作的一端称为栈顶(top)，另一端为栈底(bottom)；栈底固定，而栈顶浮动；栈中元素个数为零时称为空栈。插入一般称为进栈（PUSH），删除则称为退栈（POP）。栈也称为先进后出表。 数组实现1234567891011const int N = 1e6 + 10;int q[N], tot;inline void push(int x) &#123; q[++tot] = x;&#125;inline int top() &#123; return q[tot];&#125;inline void pop(int x) &#123; tot--;&#125; STL1234#include&lt;iostream&gt;#include&lt;stack&gt;using namespace std;stack&lt;int&gt; q; 压栈:1q.push(x); 弹栈:1q.pop(); 返回栈顶：1int x = q.top(); 返回栈的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
+      <categories>
+        <category>基本数据结构</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -153,39 +230,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[并查集]]></title>
-    <url>%2F2019%2F10%2F08%2F%E5%B9%B6%E6%9F%A5%E9%9B%86%2F</url>
-    <content type="text"><![CDATA[介绍并查集，在一些有N个元素的集合应用问题中，我们通常是在开始时让每个元素构成一个单元素的集合，然后按一定顺序将属于同一组的元素所在的集合合并，其间要反复查找一个元素在哪个集合中。这一类问题近几年来反复出现在信息学的国际国内赛题中，其特点是看似并不复杂，但数据量极大，若用正常的数据结构来描述的话，往往在空间上过大，计算机无法承受；即使在空间上勉强通过，运行的时间复杂度也极高，根本就不可能在比赛规定的运行时间（1～3秒）内计算出试题需要的结果，只能用并查集来描述。并查集是一种树型的数据结构，用于处理一些不相交集合（Disjoint Sets）的合并及查询问题。常常在使用中以森林来表示。 操作123456789#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;int fa[N], n, m;inline void init() &#123; for(int i = 1; i &lt;= n + 10; i++)fa[i] = i;&#125; get1234inline int get(int x) &#123; if(fa[x] == x)return x; return fa[x] = get(fa[x]);&#125; merge123inline void merge(int x, int y) &#123; fa[get(x)] = get(y);&#125; same123inline bool same(int x, int y) &#123; return get(x) == get(y);&#125;]]></content>
-      <categories>
-        <category>高等数据结构</category>
-      </categories>
-      <tags>
-        <tag>并查集</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[vector]]></title>
-    <url>%2F2019%2F10%2F08%2Fvector%2F</url>
-    <content type="text"><![CDATA[定义向量（Vector）是一个封装了动态大小数组的顺序容器（Sequence Container）。跟任意其它类型容器一样，它能够存放各种类型的对象。可以简单的认为，向量是一个能够存放任意类型的动态数组。 vector的使用方法1234#include&lt;iostream&gt;#include&lt;vector&gt;using namespace std;vector&lt;int&gt;V; 返回向量个数:1return V.size(); 在向量末尾添加元素:1V.push_back(x); 删除向量最后一个元素:1V.pop_back(); 返回指向向量开头的迭代器:1return V.begin(); 返回指向向量末尾的迭代器:1return V.end(); 在向量的位置 p 处 插入元素 x:1V.insert(p, x); 删除向量位置 p 处 的元素:1V.erase(p); 删除向量中所有元素:1V.clear();]]></content>
-      <categories>
-        <category>基本数据结构</category>
-      </categories>
-      <tags>
-        <tag>vector</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[快速幂]]></title>
-    <url>%2F2019%2F10%2F08%2F%E5%BF%AB%E9%80%9F%E5%B9%82%2F</url>
-    <content type="text"><![CDATA[介绍顾名思义，快速幂就是快速算底数的 $n$ 次幂。其时间复杂度为 $O(log₂N)$， 与朴素的 $O(N)$ 相比效率有了极大的提高。(N 为幂)$x^{b} % mod$ 非递归12345678910const long long mod = 114514;inline long long mod_pow(long long x, long long b) &#123; long long res = 1; while(b) &#123; if(n &amp; 1) res = res * x % mod; x = x * x % mod; n &gt;&gt;= 1; &#125; return res;&#125; 递归1234567const long long mod = 114514;inline long long mod_pow(long long x, long long b) &#123; if(b == 0)return 1; long long res = mod_pow(x * x % mod, n / 2); if(n &amp; 1) res = res * x % mod; return res;&#125;]]></content>
-      <categories>
-        <category>数论</category>
-      </categories>
-      <tags>
-        <tag>快速幂</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[链表]]></title>
     <url>%2F2019%2F10%2F08%2F%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[定义链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。链表由一系列结点（链表中每一个元素称为结点）组成，结点可以在运行时动态生成。每个结点包括两个部分：一个是存储数据元素的数据域，另一个是存储下一个结点地址的指针域。 相比于线性表顺序结构，操作复杂。由于不必须按顺序存储，链表在插入的时候可以达到 $O(1)$ 的复杂度，比另一种线性表顺序表快得多，但是查找一个节点或者访问特定编号的节点则需要O(n)的时间，而线性表和顺序表相应的时间复杂度分别是 $O(logn)$ 和 $O(1)$ 。 数组实现123456789101112131415161718192021222324252627282930struct Node &#123; int value; int prev, next;&#125;node[SIZE];inline void init() &#123; tot = 2; head = 1, tail = 2; node[head].next = tail; node[tail].prev = head;&#125; inline void insert() &#123; int q = ++tot; node[q].value = val; node[node[p].next].prev = q; node[q].next = node[p].next; node[p].next = q; node[q].prev = p;&#125;inline void eraser(int p, int val) &#123; node[node[p].next].next = node[p].next; node[node[p].next].prev = node[p].prev; &#125;inline void clear() &#123; memset(node, 0, sizeof node); head = tail = tot = 0;&#125; 指针实现12345678910111213141516171819202122232425262728293031323334struct Node &#123; int val; Node *prev, *next;&#125;;Node *head, *tail;inline void init()&#123; head = new Node(); tail = new Node(); head-&gt;next = tail; tail-&gt;prev = head;&#125;inline void insert(Node *p, int val) &#123; int *q = new Node(); q-&gt;value = val; p-&gt;next-&gt;prev = q; q-&gt;next = p-&gt;next; p-&gt;next = q; q-&gt;prev = p;&#125;inline void romove(Node *p) &#123; p-&gt;prev-&gt;next = p-&gt;next; p-&gt;next-&gt;prev = p-&gt;prev; delete = p;&#125;inline void recycle() &#123; while(head != tail) &#123; head = head-&gt;next; delete head-&gt;prev; &#125; delete tail;&#125; STL实现1234#include&lt;iostream&gt;#include&lt;list&gt;using namespace std;vector&lt;int&gt;V; 返回元素个数:1return V.size(); 在链表开头添加元素:1V.push_front(x); 在链表末尾添加元素:1V.push_back(x); 删除表头元素:1V.pop_front(); 删除表末尾元素:1V.pop_back(); 在表的位置 p 处 插入元素 x:1V.insert(p, x); 删除表中位置 p 处 的元素:1V.erase(p); 删除向量中所有元素:1V.clear();]]></content>
@@ -197,28 +241,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[栈]]></title>
-    <url>%2F2019%2F10%2F08%2F%E6%A0%88%2F</url>
-    <content type="text"><![CDATA[定义栈作为一种数据结构，是一种只能在一端进行插入和删除操作的特殊线性表。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。栈具有记忆作用，对栈的插入与删除操作中，不需要改变栈底指针。栈是允许在同一端进行插入和删除操作的特殊线性表。允许进行插入和删除操作的一端称为栈顶(top)，另一端为栈底(bottom)；栈底固定，而栈顶浮动；栈中元素个数为零时称为空栈。插入一般称为进栈（PUSH），删除则称为退栈（POP）。栈也称为先进后出表。 数组实现1234567891011const int N = 1e6 + 10;int q[N], tot;inline void push(int x) &#123; q[++tot] = x;&#125;inline int top() &#123; return q[tot];&#125;inline void pop(int x) &#123; tot--;&#125; STL1234#include&lt;iostream&gt;#include&lt;stack&gt;using namespace std;stack&lt;int&gt; q; 压栈:1q.push(x); 弹栈:1q.pop(); 返回栈顶：1int x = q.top(); 返回栈的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
-      <categories>
-        <category>基本数据结构</category>
-      </categories>
-      <tags>
-        <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[质数]]></title>
-    <url>%2F2019%2F10%2F08%2F%E8%B4%A8%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[定义质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。 质数检验普通12345678inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; for(int i = 2; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 简单优化123456789inline bool prime(int n) &#123; if(n &lt; 2)return false; if(n == 2)return true; if(n % 2 == 0)return false; for(int i = 3; i * i &lt;= n; i++) &#123; if(n % i == 0)return false; &#125; return true;&#125; 质数表埃氏筛法1234567891011bool v[N];inline int prime(int n) &#123; memset(v, true, v); v[0] = v[1] = 0; for(int i = 2; i &lt;= n; i++) &#123; if(!v[i])continue; for(int j = i; j &lt;= n / i; j++) &#123; v[j] = false; &#125; &#125;&#125; 欧拉筛法123456789101112131415161718int v[N], prime[N];inilne void primes(int n) &#123; memset(v, 0, sizeof v); int cnt = 0;//质数个数 for(int i = 2; i &lt;= n; i++) &#123; if(v[i])continue; v[i] = i; prime[++tot] = i; for(int j = 1; j &lt;= tot; j++) &#123; if(prime[j] &gt; v[i] || prime[j] &gt; n / i)break; v[i * prime[j]] = prime[j]; &#125; &#125; for(int i = 1; i &lt;= tot; i++) &#123; printf("%d\n", prime[i]); &#125; return &#125;]]></content>
-      <categories>
-        <category>数论</category>
-      </categories>
-      <tags>
-        <tag>质数</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[优先队列]]></title>
     <url>%2F2019%2F10%2F08%2F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%2F</url>
     <content type="text"><![CDATA[定义优先队列(priority queue)普通的队列是一种先进先出的数据结构，元素在队列尾追加，而从队列头删除。在优先队列中，元素被赋予优先级。当访问元素时，具有最高优先级的元素最先删除。优先队列具有最高级先出 （first in, largest out）的行为特征。通常采用堆数据结构来实现。 数组实现12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;cstdio&gt;using namespace std;const int N = 1e6 + 10;int heap[N], n;inline void up(int p) &#123; while(p &gt; 1) &#123; if(heap[p] &gt; heap[p / 2]) &#123; swap(heap[o], heap[p / 2]); p /= 2; &#125; &#125;&#125;inline void down(int p) &#123; int s = p * 2; if(s &lt; n &amp;&amp; heap[s] &lt; heap[s + 1])s++; while(s &lt;= n) &#123; if(heap[s] &gt; heap[n]) &#123; swap(heap[s], heap[p]); p = s; s = p * 2; &#125; else break; &#125;&#125; top123inline int gettop() &#123; return heap[1];&#125; pop()1234inline void pop() &#123; heap[1] = heap[n--]; down(1);&#125; STL12345#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;priority_queue&lt;int&gt;q;//大根堆priority_queue&lt;int,vector&lt;int&gt;, greater&lt;int&gt; &gt; q; 入队:1q.push(x); 出队:1q.pop(); 返回队头：1int x = q.top(); 返回队列的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
@@ -227,28 +249,6 @@
       </categories>
       <tags>
         <tag>优先队列</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[约数]]></title>
-    <url>%2F2019%2F10%2F08%2F%E7%BA%A6%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[定义约数，又称因数。整数a除以整数b(b≠0) 除得的商正好是整数而没有余数，我们就说a能被b整除，或b能整除a。a称为b的倍数，b称为a的约数。在大学之前，”约数”一词所指的一般只限于正约数。约数和倍数都是二元关系的概念，不能孤立地说某个整数是约数或倍数。一个整数的约数是有限的。同时，它可以在特定情况下成为公约数。 欧几里得算法(辗转相除法)循环写法1234567891011inline int gcd(int a, int b) &#123; if(a &lt; b)swap(a, b); int res = 0; while(b) &#123; res = a % b; a = b; b = res; &#125; return b;&#125; 递归写法1234inline int gcd(int a, int b) &#123; return b ? gcd(b, a % b) : a;&#125;]]></content>
-      <categories>
-        <category>数论</category>
-      </categories>
-      <tags>
-        <tag>约数</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[队列]]></title>
-    <url>%2F2019%2F10%2F08%2F%E9%98%9F%E5%88%97%2F</url>
-    <content type="text"><![CDATA[定义队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操作的端称为队头。队列中没有元素时，称为空队列。队列的数据元素又称为队列元素。在队列中插入一个队列元素称为入队，从队列中删除一个队列元素称为出队。因为队列只允许在一端插入，在另一端删除，所以只有最早进入队列的元素才能最先从队列中删除，故队列又称为先进先出（FIFO—first in first out）线性表。 数组实现1234567891011const int N = 1e6 + 10;int q[N], head, tail;inline void push(int x) &#123; q[++tail] = x;&#125;inline int top() &#123; return q[tail];&#125;inline void pop(int x) &#123; head++;&#125; STL实现1234#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;queue&lt;int&gt; q; 入队:1q.push(x); 出队:1q.pop(); 返回队头：1int x = q.front(); 返回队列的大小1int SIZE = q.size(); 判断是否为空1234inline bool is_empty() &#123; if(q.empty())return true; return false;&#125;]]></content>
-      <categories>
-        <category>基本数据结构</category>
-      </categories>
-      <tags>
-        <tag>队列</tag>
       </tags>
   </entry>
   <entry>
@@ -311,18 +311,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[树的直径]]></title>
-    <url>%2F2019%2F07%2F13%2F%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%2F</url>
-    <content type="text"><![CDATA[给定一棵树，树中每条边都有一个权值，树中两点之间的距离定义为连接两点的路径边权之和。树中最远的两个节点之间的距离被称为树的直径，连接这两点的路径被称为树的最长链。后者通常也可称为直径，即直径是一个数值概念，也可代指一条路径。树的直径通常有两种求法，时间复杂度均为O(n)。 dp求树的直径12345678910void dp(int x) &#123; v[x] = 1; for(int i = head[x]; i; i = Next[i]) &#123; int y = ver[i], z = edge[i]; if(v[y])continue; dp(y); ans = max(ans, d[x] + d[y] + z); d[x] = max(d[x], d[y] + z); &#125;&#125; BFS求树的直径12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;queue&gt;using namespace std;const int N = 1e6 + 10;const int INF = 1061109567;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w= -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;int head[N], ver[N], Next[N], edge[N], tot;int v[N], d[N];inline void add(int x, int y, int z) &#123; ver[++tot] = y; edge[tot] = z; Next[tot] = head[x]; head[x] = tot;&#125;int pos, ans;inline void bfs(int s) &#123; memset(d, 0, sizeof(d)); memset(v, 0, sizeof(v)); queue&lt;int&gt;q; q.push(s); v[s] = 1; while(q.size()) &#123; int x = q.front(); q.pop(); for(int i = head[x]; i; i = Next[i]) &#123; int y = ver[i], z = edge[i]; if(v[y])continue; v[y] = 1; d[y] = d[x] + z; q.push(y); &#125; pos = x; &#125;&#125;int n, m;int main() &#123; n = read(); for(int i = 1; i &lt; n; i++) &#123; int x = read(), y = read(), z = 1; add(x, y, z); add(y, x, z); &#125; bfs(1); bfs(pos); printf("%d\n", d[pos]); return 0;&#125;]]></content>
-      <categories>
-        <category>模板</category>
-      </categories>
-      <tags>
-        <tag>树的直径</tag>
-        <tag>图论</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[货币系统]]></title>
     <url>%2F2019%2F07%2F13%2F%E8%B4%A7%E5%B8%81%E7%B3%BB%E7%BB%9F%2F</url>
     <content type="text"><![CDATA[题目描述在网友的国度中共有 n 种不同面额的货币，第 i 种货币的面额为 a[i]，你可以假设每一种货币都有无穷多张。为了方便，我们把货币种数为 n、面额数组为 a[1..n]的货币系统记作 (n,a)。在一个完善的货币系统中，每一个非负整数的金额 x 都应该可以被表示出，即对每一个非负整数 x，都存在 n 个非负整数 t[i] 满足 a[i]× t[i] 的和为 x。然而，在网友的国度中，货币系统可能是不完善的，即可能存在金额 x 不能被该货币系统表示出。例如在货币系统 n=3, a=[2,5,9] 中，金额 1,3 就无法被表示出来。两个货币系统 (n,a) 和 (m,b) 是等价的，当且仅当对于任意非负整数 x，它要么均可以被两个货币系统表出，要么不能被其中任何一个表出。现在网友们打算简化一下货币系统。他们希望找到一个货币系统 (m,b)，满足(m,b) 与原来的货币系统 (n,a) 等价，且 m 尽可能的小。他们希望你来协助完成这个艰巨的任务：找到最小的 m。 输入格式输入文件的第一行包含一个整数 T，表示数据的组数。接下来按照如下格式分别给出 T 组数据。每组数据的第一行包含一个正整数 n。接下来一行包含 n 个由空格隔开的正整数a[i]。 输出格式输出文件共有 T 行，对于每组数据，输出一行一个正整数，表示所有与 (n,a) 等价的货币系统 (m,b) 中，最小的 m。 Sample Input12345243 19 10 6511 29 13 19 17 Sample Output1225 数据范围与提示在第一组数据中，货币系统 (2, [3,10]) 和给出的货币系统 (n, a) 等价，并可以验证不存在 m &lt; 2 的等价的货币系统，因此答案为 2。在第二组数据中，可以验证不存在 m &lt; n 的等价的货币系统，因此答案为 5。 对于 100% 的数据，满足 1 ≤ T ≤ 20, n,a[i] ≥ 1。 Code:123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt; #include&lt;cmath&gt;#include&lt;algorithm&gt;using namespace std;const int MAX_N = 1e6 + 10;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;int T, a[MAX_N], b[MAX_N], n, m;bool v[MAX_N];int main() &#123; freopen("money.in", "r", stdin); freopen("money.out", "w", stdout); T = read(); while(T--) &#123; int ans = 0; memset(a, 0 ,sizeof(a)); memset(b, 0 ,sizeof(b)); memset(v, 0 ,sizeof(v)); n = read(); for(int i = 1; i &lt;= n; i++)a[i] = read(); sort(a + 1, a + 1 + n); if(a[1] == 1) &#123; printf("1\n"); continue; &#125; for(int i = 1; i &lt;= n; i++) &#123; if(v[a[i]])continue; v[a[i]] = 1; for(int j = 1; j + a[i] &lt;= a[n]; j++) &#123; if(!v[j])continue; v[a[i] + j] = 1; &#125; ans++; &#125; printf("%d\n", ans); &#125; return 0;&#125;]]></content>
@@ -332,6 +320,18 @@
       <tags>
         <tag>筛法</tag>
         <tag>noip2018</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[树的直径]]></title>
+    <url>%2F2019%2F07%2F13%2F%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%2F</url>
+    <content type="text"><![CDATA[给定一棵树，树中每条边都有一个权值，树中两点之间的距离定义为连接两点的路径边权之和。树中最远的两个节点之间的距离被称为树的直径，连接这两点的路径被称为树的最长链。后者通常也可称为直径，即直径是一个数值概念，也可代指一条路径。树的直径通常有两种求法，时间复杂度均为O(n)。 dp求树的直径12345678910void dp(int x) &#123; v[x] = 1; for(int i = head[x]; i; i = Next[i]) &#123; int y = ver[i], z = edge[i]; if(v[y])continue; dp(y); ans = max(ans, d[x] + d[y] + z); d[x] = max(d[x], d[y] + z); &#125;&#125; BFS求树的直径12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;queue&gt;using namespace std;const int N = 1e6 + 10;const int INF = 1061109567;inline int read() &#123; int s = 0, w = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-')w= -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')s = s * 10 + ch - '0', ch = getchar(); return s * w;&#125;int head[N], ver[N], Next[N], edge[N], tot;int v[N], d[N];inline void add(int x, int y, int z) &#123; ver[++tot] = y; edge[tot] = z; Next[tot] = head[x]; head[x] = tot;&#125;int pos, ans;inline void bfs(int s) &#123; memset(d, 0, sizeof(d)); memset(v, 0, sizeof(v)); queue&lt;int&gt;q; q.push(s); v[s] = 1; while(q.size()) &#123; int x = q.front(); q.pop(); for(int i = head[x]; i; i = Next[i]) &#123; int y = ver[i], z = edge[i]; if(v[y])continue; v[y] = 1; d[y] = d[x] + z; q.push(y); &#125; pos = x; &#125;&#125;int n, m;int main() &#123; n = read(); for(int i = 1; i &lt; n; i++) &#123; int x = read(), y = read(), z = 1; add(x, y, z); add(y, x, z); &#125; bfs(1); bfs(pos); printf("%d\n", d[pos]); return 0;&#125;]]></content>
+      <categories>
+        <category>模板</category>
+      </categories>
+      <tags>
+        <tag>树的直径</tag>
+        <tag>图论</tag>
       </tags>
   </entry>
 </search>
